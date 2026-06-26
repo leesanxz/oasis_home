@@ -1,10 +1,9 @@
 name: Deploy to XServer
 
-# main ブランチへの push でビルドし、XServer の public_html へFTPSアップロードします。
-# 手動実行（workflow_dispatch）も可能です。
+# XServer の public_html へFTPSアップロードします。
+# ※ FTP認証情報(Secrets)を登録してから手動実行してください。
+#   準備が整ったら push トリガー（main）を有効化して「push→自動公開」運用に切替可能。
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 # 同時実行を1つに制限（途中のデプロイを中断して最新を反映）
