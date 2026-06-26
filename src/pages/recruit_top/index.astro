@@ -1,0 +1,129 @@
+---
+import Base from '../../layouts/Base.astro';
+import { COMPANY } from '../../data/site';
+
+const points = [
+  {
+    title: '幅広い技術領域',
+    text: 'ソフトウェア開発からクラウド構築まで、多様なプロジェクトに携われます。',
+  },
+  {
+    title: '成長できる環境',
+    text: '新しい技術に挑戦できる環境で、エンジニアとしてのスキルを伸ばせます。',
+  },
+  {
+    title: '人を大切にする文化',
+    text: '“オアシス”の名の通り、人を大切にし、働きやすさを重視しています。',
+  },
+];
+---
+
+<Base title="採用情報" path="/recruit_top/" description="株式会社オアシス情報システムズの採用情報。一緒に未来をつくる仲間を募集しています。">
+  <section class="page-hero">
+    <div class="container">
+      <h1>採用情報<span class="en">RECRUIT</span></h1>
+    </div>
+  </section>
+
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/">ホーム</a> ／ <span>採用情報</span>
+    </nav>
+  </div>
+
+  <section class="section" style="padding-top: clamp(20px, 4vw, 40px)">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">MESSAGE</span>
+        <h2>一緒に、未来をつくりませんか</h2>
+        <p class="lead">
+          私たちは、確かな技術と人の力でお客様のビジネスを支えています。<br />
+          新しい仲間として、あなたの力を発揮してください。
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        {points.map((p) => (
+          <div class="card recruit-point reveal">
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="apply-box card reveal">
+        <div>
+          <h2>ご応募について</h2>
+          <p>
+            ご応募はオンライン応募フォームより受け付けております。<br />
+            ご記入いただいた個人情報は、採用選考の目的にのみ利用いたします。
+          </p>
+          <p class="apply-note">
+            個人情報の取り扱いについては
+            <a href="/privacy/">個人情報保護方針</a>
+            および
+            <a href="/docs/recruit-privacy.pdf" target="_blank" rel="noopener">採用応募時の個人情報の取扱い（PDF）</a>
+            をご確認ください。
+          </p>
+        </div>
+        <div class="apply-actions">
+          <a href="/recruit_top/subscription/" class="btn btn--primary">オンライン応募へ</a>
+          <p class="apply-tel">
+            お電話：<a href={`tel:${COMPANY.tel.replaceAll('-', '')}`}>{COMPANY.tel}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .recruit-point {
+    padding: 32px 28px;
+  }
+  .recruit-point h3 {
+    color: var(--blue-dark);
+    margin-bottom: 0.5em;
+    padding-left: 0.6em;
+    border-left: 4px solid var(--green);
+  }
+  .recruit-point p {
+    color: var(--ink-soft);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  .apply-box {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+    padding: clamp(32px, 5vw, 52px);
+  }
+  .apply-box h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.6em;
+  }
+  .apply-box p {
+    color: var(--ink-soft);
+  }
+  .apply-note {
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .apply-actions {
+    text-align: center;
+  }
+  .apply-tel {
+    margin-top: 1em;
+    font-size: 0.9rem;
+  }
+  @media (max-width: 720px) {
+    .apply-box {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

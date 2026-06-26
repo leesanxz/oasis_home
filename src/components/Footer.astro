@@ -1,0 +1,123 @@
+---
+import { COMPANY, SITE, NAV } from '../data/site';
+const year = 2026; // ビルド時固定（必要に応じて更新）
+---
+
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <img src="/assets/logo.png" alt={SITE.name} width="150" height="89" />
+      <p class="f-tagline">{SITE.tagline}</p>
+      <p class="f-address">
+        〒{COMPANY.postalCode}<br />
+        {COMPANY.address}<br />
+        TEL：<a href={`tel:${COMPANY.tel.replaceAll('-', '')}`}>{COMPANY.tel}</a>
+      </p>
+    </div>
+
+    <nav class="footer-nav" aria-label="フッターナビゲーション">
+      <h2>サイトマップ</h2>
+      <ul>
+        {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        <li><a href="/privacy/">個人情報保護方針</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-contact">
+      <h2>お問い合わせ</h2>
+      <p>採用に関するお問い合わせ・ご応募はこちらから。</p>
+      <a href="/recruit_top/subscription/" class="btn btn--primary">オンライン応募</a>
+      <p class="f-sns">
+        <a href={COMPANY.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <small>© {year} {SITE.name} All rights reserved.</small>
+      <small>法人番号：{COMPANY.corporateNumber}</small>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: #14222e;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.92rem;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: clamp(28px, 5vw, 56px);
+    padding-block: clamp(48px, 7vw, 76px);
+  }
+  .footer-brand img {
+    height: 52px;
+    width: auto;
+    background: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+  }
+  .f-tagline {
+    margin-top: 1em;
+    color: var(--green);
+    font-weight: 700;
+  }
+  .f-address {
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .f-address a {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .footer-nav h2,
+  .footer-contact h2 {
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 1em;
+    padding-bottom: 0.6em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .footer-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .footer-nav li {
+    margin-bottom: 0.7em;
+  }
+  .footer-nav a {
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .footer-nav a:hover {
+    color: var(--green);
+  }
+  .footer-contact .btn {
+    margin: 0.4em 0 1.4em;
+  }
+  .f-sns a {
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: underline;
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-block: 18px;
+  }
+  .footer-bottom .container {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .footer-bottom small {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.8rem;
+  }
+  @media (max-width: 860px) {
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#2a86c0"/>
+  <!-- water drop (oasis) -->
+  <path d="M32 14c7 9 11 14.5 11 20a11 11 0 0 1-22 0c0-5.5 4-11 11-20z" fill="#fff"/>
+  <!-- leaf accent -->
+  <path d="M40 18c5-3 11-2 11-2s.5 6-3 9.5-8 2.5-8 2.5 .5-7 0-10z" fill="#98c727"/>
+</svg>

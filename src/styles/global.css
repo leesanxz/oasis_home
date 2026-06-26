@@ -1,0 +1,335 @@
+/* =========================================================
+   OiS Design System — global styles
+   Brand: blue #2A86C0 / green #98C727 (oasis = water + green)
+   ========================================================= */
+
+:root {
+  --blue: #2a86c0;
+  --blue-dark: #1f6a9b;
+  --blue-700: #195677;
+  --green: #98c727;
+  --green-dark: #7aa81d;
+  --ink: #1f2933;
+  --ink-soft: #45525e;
+  --muted: #6b7785;
+  --line: #e3e9ef;
+  --bg: #ffffff;
+  --bg-soft: #f5f8fb;
+  --bg-blue-soft: #eef6fb;
+  --white: #ffffff;
+
+  --radius: 14px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 1px 2px rgba(31, 41, 51, 0.06), 0 1px 3px rgba(31, 41, 51, 0.05);
+  --shadow: 0 6px 24px rgba(31, 41, 51, 0.08);
+  --shadow-lg: 0 18px 50px rgba(25, 86, 119, 0.14);
+
+  --maxw: 1140px;
+  --gutter: clamp(20px, 5vw, 48px);
+
+  --font: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
+
+  --header-h: 76px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.8;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--blue-dark);
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+a:hover {
+  color: var(--blue);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+p {
+  margin: 0 0 1.2em;
+}
+
+/* ---------- layout helpers ---------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(64px, 9vw, 116px);
+}
+.section--soft {
+  background: var(--bg-soft);
+}
+.section--blue {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+  color: #fff;
+}
+
+/* ---------- section heading ---------- */
+.section-head {
+  text-align: center;
+  margin-bottom: clamp(36px, 5vw, 60px);
+}
+.section-head .eyebrow {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--blue);
+  margin-bottom: 0.6em;
+}
+.section--blue .section-head .eyebrow {
+  color: var(--green);
+}
+.section-head h2 {
+  font-size: clamp(1.65rem, 3.4vw, 2.4rem);
+}
+.section-head .lead {
+  margin-top: 0.9em;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+.section--blue .section-head h2,
+.section--blue .section-head .lead {
+  color: #fff;
+}
+.section--blue .section-head .lead {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  padding: 0.85em 1.8em;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease,
+    color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+.btn--primary {
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(122, 168, 29, 0.32);
+}
+.btn--primary:hover {
+  background: var(--green-dark);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn--blue {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(42, 134, 192, 0.3);
+}
+.btn--blue:hover {
+  background: var(--blue-dark);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn--ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.65);
+  color: #fff;
+}
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn--outline {
+  background: #fff;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn--outline:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  transform: translateY(-2px);
+}
+
+/* ---------- cards ---------- */
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- utilities ---------- */
+.text-center {
+  text-align: center;
+}
+.grid {
+  display: grid;
+  gap: clamp(20px, 3vw, 32px);
+}
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (max-width: 860px) {
+  .grid-3,
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- reveal on scroll ----------
+   JSが有効なときのみ初期状態を非表示にする（no-JS/SEOでは常に表示）。 */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- page hero (sub pages) ---------- */
+.page-hero {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+  color: #fff;
+  padding-block: clamp(56px, 9vw, 92px);
+  padding-top: calc(var(--header-h) + clamp(40px, 7vw, 70px));
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 40px;
+  background: var(--bg);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+.page-hero h1 {
+  color: #fff;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  position: relative;
+  z-index: 1;
+}
+.page-hero .en {
+  display: block;
+  margin-top: 0.5em;
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* breadcrumb */
+.breadcrumb {
+  font-size: 0.84rem;
+  color: var(--muted);
+  padding-block: 18px;
+}
+.breadcrumb a {
+  color: var(--muted);
+}
+.breadcrumb a:hover {
+  color: var(--blue);
+}
+
+/* prose blocks (legal pages) */
+.prose {
+  max-width: 860px;
+  margin-inline: auto;
+}
+.prose h2 {
+  font-size: 1.3rem;
+  margin-top: 2.2em;
+  padding-left: 0.7em;
+  border-left: 4px solid var(--green);
+}
+.prose h3 {
+  font-size: 1.05rem;
+  margin-top: 1.6em;
+  color: var(--blue-dark);
+}
+.prose ol,
+.prose ul {
+  padding-left: 1.4em;
+}
+.prose li {
+  margin-bottom: 0.4em;
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2em 0;
+  font-size: 0.95rem;
+}
+.prose th,
+.prose td {
+  border: 1px solid var(--line);
+  padding: 0.7em 0.9em;
+  text-align: left;
+  vertical-align: top;
+}
+.prose th {
+  background: var(--bg-soft);
+  white-space: nowrap;
+}

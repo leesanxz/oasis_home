@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import { COMPANY } from '../../data/site';
+
+// 出典: public/docs/privacy-policy.pdf（個人情報保護方針 2023年6月7日制定）
+const policyItems = [
+  '個人情報は、システム開発業務における当社の正当な事業遂行上並びに従業員の雇用、人事管理上必要な範囲に限定して、取得・利用及び提供をし、特定された利用目的の達成に必要な範囲を超えた個人情報の取扱い（目的外利用）を行いません。また、目的外利用を行わないための措置を講じます。',
+  '個人情報保護に関する法令、国が定める指針及びその他の規範を遵守致します。',
+  '個人情報の漏えい、滅失、き損などのリスクに対しては、合理的な安全対策を講じて防止すべく事業の実情に合致した経営資源を注入し個人情報セキュリティ体制を継続的に向上させます。また、個人情報保護上、問題があると判断された場合には速やかに是正措置を講じます。',
+  '個人情報取扱いに関する苦情及び相談に対しては、迅速かつ誠実に、適切な対応をさせていただきます。',
+  '個人情報保護マネジメントシステムは、当社を取り巻く環境の変化を踏まえ、適時・適切に見直してその改善を継続的に推進します。',
+];
+---
+
+<Base
+  title="個人情報保護方針"
+  path="/privacy/"
+  description="株式会社オアシス情報システムズの個人情報保護方針および個人情報の取扱いについて。"
+>
+  <section class="page-hero">
+    <div class="container">
+      <h1>個人情報保護方針<span class="en">PRIVACY POLICY</span></h1>
+    </div>
+  </section>
+
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/">ホーム</a> ／ <span>個人情報保護方針</span>
+    </nav>
+  </div>
+
+  <section class="section" style="padding-top: clamp(20px, 4vw, 40px)">
+    <div class="container">
+      <div class="prose reveal">
+        <p>
+          当社は、当社が取り扱う全ての個人情報の保護について、社会的使命を十分に認識し、本人の権利の保護、個人情報に関する法規制等を遵守します。また、以下に示す方針を具現化するための個人情報保護マネジメントシステムを構築し、最新のＩＴ技術の動向、社会的要請の変化、経営環境の変動等を常に認識しながら、その継続的改善に、全社を挙げて取り組むことをここに宣言します。
+        </p>
+
+        <ol>
+          {policyItems.map((t) => <li>{t}</li>)}
+        </ol>
+
+        <h2>お問合せ窓口</h2>
+        <p>個人情報保護方針に関するお問合せにつきましては、下記窓口で受付けております。</p>
+        <p>
+          {COMPANY.name}　個人情報問合せ窓口<br />
+          〒{COMPANY.postalCode}　{COMPANY.address}<br />
+          メールアドレス：<a href={`mailto:${COMPANY.privacyEmail}`}>{COMPANY.privacyEmail}</a>
+        </p>
+
+        <p class="enacted">
+          制定年月日　2023年6月7日<br />
+          {COMPANY.name}　{COMPANY.representatives[0].title} {COMPANY.representatives[0].name}
+        </p>
+
+        <h2>関連文書</h2>
+        <p>個人情報の取扱いに関する詳細は、以下の文書をご確認ください。</p>
+        <ul class="doc-links">
+          <li><a href="/docs/privacy-policy.pdf" target="_blank" rel="noopener">個人情報保護方針（PDF）</a></li>
+          <li><a href="/docs/privacy-public-statement.pdf" target="_blank" rel="noopener">個人情報の取扱いについて（公表文・PDF）</a></li>
+          <li><a href="/docs/recruit-privacy.pdf" target="_blank" rel="noopener">採用応募時の個人情報の取扱い（PDF）</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .enacted {
+    text-align: right;
+    color: var(--ink-soft);
+    margin-top: 2em;
+  }
+  .doc-links {
+    list-style: none;
+    padding: 0;
+  }
+  .doc-links li {
+    margin-bottom: 0.6em;
+  }
+  .doc-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-weight: 600;
+  }
+  .doc-links a::before {
+    content: "📄";
+  }
+</style>

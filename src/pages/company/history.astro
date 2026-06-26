@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import { HISTORY } from '../../data/site';
+---
+
+<Base title="会社沿革" path="/company/history/" description="株式会社オアシス情報システムズの沿革をご紹介します。">
+  <section class="page-hero">
+    <div class="container">
+      <h1>会社沿革<span class="en">HISTORY</span></h1>
+    </div>
+  </section>
+
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="/">ホーム</a> ／ <span>会社沿革</span>
+    </nav>
+  </div>
+
+  <section class="section" style="padding-top: clamp(20px, 4vw, 40px)">
+    <div class="container">
+      <ol class="timeline">
+        {HISTORY.map((h) => (
+          <li class="timeline-item reveal">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-year">{h.year}</div>
+            <div class="timeline-text">{h.text}</div>
+          </li>
+        ))}
+      </ol>
+
+      <p class="note">
+        ※ 沿革の一部は公開情報をもとに記載しています。正式な内容は順次更新いたします。
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .timeline {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 760px;
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--line);
+  }
+  .timeline-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 20px;
+    padding: 0 0 30px 40px;
+  }
+  .timeline-dot {
+    position: absolute;
+    left: 2px;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--green);
+  }
+  .timeline-year {
+    font-weight: 700;
+    color: var(--blue-dark);
+  }
+  .timeline-text {
+    color: var(--ink-soft);
+  }
+  .note {
+    max-width: 760px;
+    margin: 1.5em auto 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  @media (max-width: 600px) {
+    .timeline-item {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+</style>

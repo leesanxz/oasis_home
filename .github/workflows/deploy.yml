@@ -1,0 +1,62 @@
+name: Deploy to XServer
+
+# main ブランチへの push でビルドし、XServer の public_html へFTPSアップロードします。
+# 手動実行（workflow_dispatch）も可能です。
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 同時実行を1つに制限（途中のデプロイを中断して最新を反映）
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # XServer へFTPS（明示的TLS）でアップロード。
+      # 必要な GitHub Secrets:
+      #   FTP_SERVER   … 例: svXXXX.xserver.jp（XServerのFTPホスト）
+      #   FTP_USERNAME … FTPアカウント名
+      #   FTP_PASSWORD … FTPパスワード
+      # 必要な Variables（任意・未設定なら下記デフォルト）:
+      #   FTP_SERVER_DIR … 公開ディレクトリ（例: /oasisis.co.jp/public_html/）
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./dist/
+          server-dir: ${{ vars.FTP_SERVER_DIR || '/oasisis.co.jp/public_html/' }}
+          # WordPress資産やメールフォーム等、リポジトリ管理外のファイルを消さないよう除外
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/wp-content/**
+            **/wp-admin/**
+            **/wp-includes/**
+            **/xmailinglist/**
+            wp-*.php
+            xmlrpc.php
+            .htaccess
