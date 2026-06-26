@@ -1,12 +1,10 @@
 name: Preview (GitHub Pages)
 
-# プレビュー用の公開サイトを GitHub Pages に自動デプロイします。
+# プレビュー用の公開サイトを GitHub Pages に公開します。
 # 公開URL: https://leesanxz.github.io/oasis_home/
-# 対象ブランチへの push、または手動実行で公開します。
+# ※ 事前にリポジトリ設定で Pages を有効化（Source: GitHub Actions）してください。
+#   有効化後に手動実行（Actions → Preview (GitHub Pages) → Run workflow）で公開します。
 on:
-  push:
-    branches:
-      - claude/oasis-site-renewal-1ttukj
   workflow_dispatch:
 
 permissions:
@@ -38,9 +36,6 @@ jobs:
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
-        with:
-          # Pages を自動で有効化（リポジトリ設定の手動変更を不要にする）
-          enablement: true
 
       - name: Build (with base path for project pages)
         run: npm run build
