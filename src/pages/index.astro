@@ -6,6 +6,7 @@ import AboutArt from '../components/AboutArt.astro';
 import {
   COMPANY, SERVICES, STATS, STRENGTHS, PROCESS, TECHS,
 } from '../data/site';
+import { url } from '../utils/url';
 
 const serviceIcons: Record<string, string> = {
   software: 'code',
@@ -39,6 +40,7 @@ const companyRows: { th: string; td: string }[] = [
         <div class="hero-actions">
           <a href="#services" class="btn btn--grad">事業内容を見る<Icon name="arrow" size={18} /></a>
           <a href="#company" class="btn btn--outline">会社情報</a>
+          {/* ページ内アンカーは base 不要 */}
         </div>
         <ul class="hero-mini">
           <li><Icon name="check" size={16} /> <b>2017年</b>設立</li>
@@ -186,7 +188,7 @@ const companyRows: { th: string; td: string }[] = [
             </tbody>
           </table>
           <p class="company-more">
-            <a href="/company/history/" class="btn btn--outline">会社沿革を見る<Icon name="arrow" size={18} /></a>
+            <a href={url('/company/history/')} class="btn btn--outline">会社沿革を見る<Icon name="arrow" size={18} /></a>
           </p>
         </div>
         <aside class="access-card reveal" data-delay="1">

@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { url } from '../utils/url';
 ---
 
 <Base title="ページが見つかりません" description="お探しのページは見つかりませんでした。">
@@ -8,7 +9,7 @@ import Base from '../layouts/Base.astro';
       <p class="code">404</p>
       <h1>ページが見つかりません</h1>
       <p>お探しのページは移動または削除された可能性があります。</p>
-      <a href="/" class="btn btn--grad">トップページへ戻る</a>
+      <a href={url('/')} class="btn btn--grad">トップページへ戻る</a>
     </div>
   </section>
 </Base>

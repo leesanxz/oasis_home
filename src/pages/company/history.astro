@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { HISTORY } from '../../data/site';
+import { url } from '../../utils/url';
 ---
 
 <Base title="会社沿革" path="/company/history/" description="株式会社オアシス情報システムズの沿革をご紹介します。">
@@ -13,7 +14,7 @@ import { HISTORY } from '../../data/site';
 
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/">ホーム</a> ／ <span>会社沿革</span>
+      <a href={url('/')}>ホーム</a> ／ <span>会社沿革</span>
     </nav>
   </div>
 

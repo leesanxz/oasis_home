@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import { COMPANY, CULTURE } from '../../data/site';
+import { url } from '../../utils/url';
 ---
 
 <Base title="採用情報" path="/recruit_top/" description="株式会社オアシス情報システムズの採用情報。一緒に未来をつくる仲間を募集しています。">
@@ -14,7 +15,7 @@ import { COMPANY, CULTURE } from '../../data/site';
 
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/">ホーム</a> ／ <span>採用情報</span>
+      <a href={url('/')}>ホーム</a> ／ <span>採用情報</span>
     </nav>
   </div>
 
@@ -64,13 +65,13 @@ import { COMPANY, CULTURE } from '../../data/site';
           </p>
           <p class="apply-note">
             個人情報の取り扱いについては
-            <a href="/privacy/">個人情報保護方針</a> および
-            <a href="/docs/recruit-privacy.pdf" target="_blank" rel="noopener">採用応募時の個人情報の取扱い（PDF）</a>
+            <a href={url('/privacy/')}>個人情報保護方針</a> および
+            <a href={url('/docs/recruit-privacy.pdf')} target="_blank" rel="noopener">採用応募時の個人情報の取扱い（PDF）</a>
             をご確認ください。
           </p>
         </div>
         <div class="apply-actions">
-          <a href="/recruit_top/subscription/" class="btn btn--grad">オンライン応募へ<Icon name="arrow" size={18} /></a>
+          <a href={url('/recruit_top/subscription/')} class="btn btn--grad">オンライン応募へ<Icon name="arrow" size={18} /></a>
           <a href={`tel:${COMPANY.tel.replaceAll('-', '')}`} class="apply-tel">
             <Icon name="phone" size={18} /> {COMPANY.tel}
           </a>

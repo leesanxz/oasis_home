@@ -1,5 +1,6 @@
 ---
 import { COMPANY, SITE, NAV } from '../data/site';
+import { url } from '../utils/url';
 const year = 2026;
 ---
 
@@ -12,7 +13,7 @@ const year = 2026;
         <p>開発のご相談も、採用のご応募も。私たちがしっかりとお応えします。</p>
       </div>
       <div class="cta-actions">
-        <a href="/recruit_top/subscription/" class="btn btn--grad">オンライン応募</a>
+        <a href={url('/recruit_top/subscription/')} class="btn btn--grad">オンライン応募</a>
         <a href={`tel:${COMPANY.tel.replaceAll('-', '')}`} class="cta-tel">
           <small>お電話でのお問い合わせ</small>
           <strong>{COMPANY.tel}</strong>
@@ -23,7 +24,7 @@ const year = 2026;
 
   <div class="container footer-top">
     <div class="footer-brand">
-      <img src="/assets/logo.png" alt={SITE.name} width="150" height="89" />
+      <img src={url('/assets/logo.png')} alt={SITE.name} width="150" height="89" />
       <p class="f-tagline">{SITE.tagline}</p>
       <p class="f-address">
         〒{COMPANY.postalCode}<br />
@@ -35,10 +36,10 @@ const year = 2026;
     <nav class="footer-nav" aria-label="フッターナビゲーション">
       <h3>サイトマップ</h3>
       <ul>
-        {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-        <li><a href="/company/history/">会社沿革</a></li>
-        <li><a href="/recruit_top/subscription/">オンライン応募</a></li>
-        <li><a href="/privacy/">個人情報保護方針</a></li>
+        {NAV.map((item) => <li><a href={url(item.href)}>{item.label}</a></li>)}
+        <li><a href={url('/company/history/')}>会社沿革</a></li>
+        <li><a href={url('/recruit_top/subscription/')}>オンライン応募</a></li>
+        <li><a href={url('/privacy/')}>個人情報保護方針</a></li>
       </ul>
     </nav>
 

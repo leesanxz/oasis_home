@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { COMPANY } from '../../data/site';
+import { url } from '../../utils/url';
 
 // 出典: public/docs/privacy-policy.pdf（個人情報保護方針 2023年6月7日制定）
 const policyItems = [
@@ -26,7 +27,7 @@ const policyItems = [
 
   <div class="container">
     <nav class="breadcrumb" aria-label="パンくず">
-      <a href="/">ホーム</a> ／ <span>個人情報保護方針</span>
+      <a href={url('/')}>ホーム</a> ／ <span>個人情報保護方針</span>
     </nav>
   </div>
 
@@ -57,9 +58,9 @@ const policyItems = [
         <h2>関連文書</h2>
         <p>個人情報の取扱いに関する詳細は、以下の文書をご確認ください。</p>
         <ul class="doc-links">
-          <li><a href="/docs/privacy-policy.pdf" target="_blank" rel="noopener">個人情報保護方針（PDF）</a></li>
-          <li><a href="/docs/privacy-public-statement.pdf" target="_blank" rel="noopener">個人情報の取扱いについて（公表文・PDF）</a></li>
-          <li><a href="/docs/recruit-privacy.pdf" target="_blank" rel="noopener">採用応募時の個人情報の取扱い（PDF）</a></li>
+          <li><a href={url('/docs/privacy-policy.pdf')} target="_blank" rel="noopener">個人情報保護方針（PDF）</a></li>
+          <li><a href={url('/docs/privacy-public-statement.pdf')} target="_blank" rel="noopener">個人情報の取扱いについて（公表文・PDF）</a></li>
+          <li><a href={url('/docs/recruit-privacy.pdf')} target="_blank" rel="noopener">採用応募時の個人情報の取扱い（PDF）</a></li>
         </ul>
       </div>
     </div>

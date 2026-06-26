@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../data/site';
+import { url } from '../utils/url';
 
 interface Props {
   title?: string;
@@ -34,8 +35,8 @@ const canonical = new URL(path, SITE.url).href;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/assets/logo-mark.png" />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="apple-touch-icon" href={url('/assets/logo-mark.png')} />
 
     <!-- 欧文ディスプレイフォント（本番のみ・日本語はシステムフォントにフォールバック） -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
