@@ -11,8 +11,9 @@ const endpoint = FORM.endpoint;
   description="株式会社オアシス情報システムズの採用オンライン応募フォームです。"
 >
   <section class="page-hero">
-    <div class="container">
-      <h1>オンライン応募<span class="en">ENTRY</span></h1>
+    <div class="container inner">
+      <span class="en">ENTRY</span>
+      <h1>オンライン応募</h1>
     </div>
   </section>
 
@@ -94,7 +95,7 @@ const endpoint = FORM.endpoint;
         </div>
 
         <div class="form-actions">
-          <button type="submit" class="btn btn--primary" id="submit-btn">応募内容を送信する</button>
+          <button type="submit" class="btn btn--grad" id="submit-btn">応募内容を送信する</button>
         </div>
 
         <p class="form-status" id="form-status" role="alert" aria-live="polite" hidden></p>
@@ -119,7 +120,7 @@ const endpoint = FORM.endpoint;
   .privacy-agree-note {
     font-size: 0.88rem;
     color: var(--muted);
-    background: var(--bg-soft);
+    background: var(--soft);
     border-radius: var(--radius);
     padding: 14px 18px;
   }

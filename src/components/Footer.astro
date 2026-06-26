@@ -1,35 +1,53 @@
 ---
 import { COMPANY, SITE, NAV } from '../data/site';
-const year = 2026; // ビルド時固定（必要に応じて更新）
+const year = 2026;
 ---
 
 <footer class="site-footer">
+  <div class="container footer-cta">
+    <div class="cta-box">
+      <div>
+        <span class="eyebrow">CONTACT &amp; RECRUIT</span>
+        <h2>まずは、お気軽にご相談ください。</h2>
+        <p>開発のご相談も、採用のご応募も。私たちがしっかりとお応えします。</p>
+      </div>
+      <div class="cta-actions">
+        <a href="/recruit_top/subscription/" class="btn btn--grad">オンライン応募</a>
+        <a href={`tel:${COMPANY.tel.replaceAll('-', '')}`} class="cta-tel">
+          <small>お電話でのお問い合わせ</small>
+          <strong>{COMPANY.tel}</strong>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="container footer-top">
     <div class="footer-brand">
       <img src="/assets/logo.png" alt={SITE.name} width="150" height="89" />
       <p class="f-tagline">{SITE.tagline}</p>
       <p class="f-address">
         〒{COMPANY.postalCode}<br />
-        {COMPANY.address}<br />
+        {COMPANY.addressLine1}<br />{COMPANY.addressLine2}<br />
         TEL：<a href={`tel:${COMPANY.tel.replaceAll('-', '')}`}>{COMPANY.tel}</a>
       </p>
     </div>
 
     <nav class="footer-nav" aria-label="フッターナビゲーション">
-      <h2>サイトマップ</h2>
+      <h3>サイトマップ</h3>
       <ul>
         {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        <li><a href="/company/history/">会社沿革</a></li>
+        <li><a href="/recruit_top/subscription/">オンライン応募</a></li>
         <li><a href="/privacy/">個人情報保護方針</a></li>
       </ul>
     </nav>
 
-    <div class="footer-contact">
-      <h2>お問い合わせ</h2>
-      <p>採用に関するお問い合わせ・ご応募はこちらから。</p>
-      <a href="/recruit_top/subscription/" class="btn btn--primary">オンライン応募</a>
-      <p class="f-sns">
-        <a href={COMPANY.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
-      </p>
+    <div class="footer-sns">
+      <h3>フォロー</h3>
+      <a href={COMPANY.facebook} target="_blank" rel="noopener noreferrer" class="sns-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v7h3v-7h3l1-3h-4v-2c0-.6.4-1 1-1z"/></svg>
+        Facebook
+      </a>
     </div>
   </div>
 
@@ -43,64 +61,86 @@ const year = 2026; // ビルド時固定（必要に応じて更新）
 
 <style>
   .site-footer {
-    background: #14222e;
-    color: rgba(255, 255, 255, 0.78);
+    background: var(--navy);
+    color: rgba(255, 255, 255, 0.72);
     font-size: 0.92rem;
   }
+
+  /* CTA band */
+  .footer-cta {
+    transform: translateY(-1px);
+    padding-top: clamp(40px, 6vw, 70px);
+  }
+  .cta-box {
+    background: var(--grad);
+    border-radius: var(--radius-xl);
+    padding: clamp(34px, 5vw, 56px);
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 32px;
+    align-items: center;
+    box-shadow: 0 30px 60px -30px rgba(42, 134, 192, 0.6);
+  }
+  .cta-box .eyebrow { color: rgba(255, 255, 255, 0.85); }
+  .cta-box h2 { color: #fff; font-size: clamp(1.5rem, 3vw, 2.1rem); margin-top: 0.4em; }
+  .cta-box p { color: rgba(255, 255, 255, 0.9); margin: 0.6em 0 0; }
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .cta-box .btn--grad {
+    background: #fff;
+    color: var(--blue-d);
+    box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.3);
+  }
+  .cta-box .btn--grad:hover { color: var(--blue-dd); }
+  .cta-tel {
+    color: #fff;
+  }
+  .cta-tel small { display: block; font-size: 0.78rem; opacity: 0.85; }
+  .cta-tel strong { font-size: 1.4rem; letter-spacing: 0.02em; }
+
+  /* main footer */
   .footer-top {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.6fr 1fr 0.8fr;
     gap: clamp(28px, 5vw, 56px);
-    padding-block: clamp(48px, 7vw, 76px);
+    padding-block: clamp(48px, 7vw, 74px);
   }
   .footer-brand img {
-    height: 52px;
+    height: 50px;
     width: auto;
     background: #fff;
     padding: 8px 12px;
     border-radius: 10px;
   }
-  .f-tagline {
-    margin-top: 1em;
-    color: var(--green);
-    font-weight: 700;
-  }
-  .f-address {
-    line-height: 1.9;
-    color: rgba(255, 255, 255, 0.7);
-  }
-  .f-address a {
-    color: rgba(255, 255, 255, 0.7);
-  }
-  .footer-nav h2,
-  .footer-contact h2 {
-    font-size: 0.95rem;
+  .f-tagline { margin-top: 1em; color: var(--green); font-weight: 700; }
+  .f-address { line-height: 1.9; color: rgba(255, 255, 255, 0.62); }
+  .f-address a { color: rgba(255, 255, 255, 0.62); }
+  .footer-nav h3,
+  .footer-sns h3 {
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
     color: #fff;
-    margin-bottom: 1em;
-    padding-bottom: 0.6em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 1.1em;
+    padding-bottom: 0.7em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   }
-  .footer-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .footer-nav ul { list-style: none; margin: 0; padding: 0; }
+  .footer-nav li { margin-bottom: 0.7em; }
+  .footer-nav a { color: rgba(255, 255, 255, 0.72); }
+  .footer-nav a:hover { color: var(--green); }
+  .sns-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.72);
+    font-weight: 600;
   }
-  .footer-nav li {
-    margin-bottom: 0.7em;
-  }
-  .footer-nav a {
-    color: rgba(255, 255, 255, 0.78);
-  }
-  .footer-nav a:hover {
-    color: var(--green);
-  }
-  .footer-contact .btn {
-    margin: 0.4em 0 1.4em;
-  }
-  .f-sns a {
-    color: rgba(255, 255, 255, 0.78);
-    text-decoration: underline;
-  }
+  .sns-link:hover { color: var(--green); }
+
   .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-block: 18px;
@@ -111,13 +151,10 @@ const year = 2026; // ビルド時固定（必要に応じて更新）
     gap: 12px;
     flex-wrap: wrap;
   }
-  .footer-bottom small {
-    color: rgba(255, 255, 255, 0.55);
-    font-size: 0.8rem;
-  }
-  @media (max-width: 860px) {
-    .footer-top {
-      grid-template-columns: 1fr;
-    }
+  .footer-bottom small { color: rgba(255, 255, 255, 0.5); font-size: 0.78rem; }
+
+  @media (max-width: 820px) {
+    .cta-box { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
   }
 </style>

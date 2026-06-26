@@ -37,6 +37,14 @@ const canonical = new URL(path, SITE.url).href;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/assets/logo-mark.png" />
 
+    <!-- 欧文ディスプレイフォント（本番のみ・日本語はシステムフォントにフォールバック） -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    />
+
     <!-- OGP -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />

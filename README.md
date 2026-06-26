@@ -40,17 +40,22 @@ Node.js 20 以上を推奨。
 
 ```
 src/
-  data/site.ts          会社情報・事業内容・ナビ・フォーム設定（中央データ）
-  layouts/Base.astro    全ページ共通レイアウト（head/SEO/ヘッダー/フッター）
-  components/            Header / Footer
+  data/site.ts          会社情報・事業内容・強み・フロー・技術・採用等の中央データ
+  layouts/Base.astro    全ページ共通レイアウト（head/SEO/フォント/ヘッダー/フッター）
+  components/
+    Header.astro / Footer.astro
+    Icon.astro          線アイコン集
+    HeroArt.astro       ヒーローの自作ビジュアル（浮遊カード）
+    AboutArt.astro      「私たちについて」用の自作SVGイラスト
   pages/
-    index.astro                    トップ（ヒーロー / 会社概要 / 事業内容 / 採用CTA）
+    index.astro                    トップ（ヒーロー / 指標 / 私たちについて / 事業内容 /
+                                    選ばれる理由 / 開発フロー / 対応技術 / 会社情報）
     company/history.astro          会社沿革        → /company/history/
     recruit_top/index.astro        採用情報        → /recruit_top/
     recruit_top/subscription.astro オンライン応募  → /recruit_top/subscription/
     privacy/index.astro            個人情報保護方針 → /privacy/
     404.astro                      404ページ
-  styles/global.css     デザインシステム
+  styles/global.css     デザインシステム（v2・モダン）
 public/
   assets/               ロゴ画像
   docs/                 個人情報関連PDF（旧サイトから移植）
@@ -58,6 +63,8 @@ public/
 ```
 
 URL構造は旧サイトを踏襲しSEO評価を維持しています。
+ビジュアル（ヒーロー / イラスト / アクセス地図風 / アイコン）はすべて自作のSVG・CSSで、
+外部画像に依存しません。
 
 ---
 
@@ -76,17 +83,19 @@ URL構造は旧サイトを踏襲しSEO評価を維持しています。
    - （任意）変数 `FTP_SERVER_DIR` … 公開ディレクトリ
      （デフォルト `/oasisis.co.jp/public_html/`）
 
-3. **内容の最終確認（一部は要確認）**
+3. **内容の最終確認（一部は当方作成のため要確認）**
    旧サイトの本文はWordPressのデータベース内にあり、今回のファイル一式
-   （`public_html`）には含まれていませんでした。以下は**公開情報をもとに
-   再構成**しているため、正式な文言・項目をご確認ください：
-   - トップページのキャッチコピー／紹介文
-   - 事業内容の説明文（`src/data/site.ts` の `SERVICES`）
-   - 会社沿革（`src/data/site.ts` の `HISTORY`）
-   - 採用情報ページの本文
+   （`public_html`）には含まれていませんでした。`src/data/site.ts` では出典を
+   コメントで明示しています（`[実]`＝確定情報／`[案]`＝当方作成・差し替え可）。
+   以下は**当方が作成した提案コピー**のため、正式な文言・項目をご確認ください：
+   - トップのキャッチコピー／紹介文、`SERVICES` の説明文
+   - `STRENGTHS`（選ばれる理由）、`PROCESS`（開発フロー）、`TECHS`（対応技術）
+   - `CULTURE`（採用ページの働く環境）、`HISTORY`（会社沿革）、アクセス案内文
 
    ※ 会社概要（法人番号・設立・資本金・代表者・所在地・TEL）と
    個人情報保護方針・取扱い（PDF由来）は実データに基づいています。
+   ※ 実在の取引先名・具体的な実績数値・認証（Pマーク等）・代表者個人の発言は、
+   事実確認できないため記載していません。ご提供いただければ反映します。
 
 ---
 

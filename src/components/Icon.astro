@@ -1,0 +1,49 @@
+---
+// シンプルな線アイコン集（stroke=currentColor）
+interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+}
+const { name, size = 24, class: cls = '' } = Astro.props;
+
+const paths: Record<string, string> = {
+  // services
+  code: '<path d="M9 8l-5 4 5 4M15 8l5 4-5 4" stroke-linecap="round" stroke-linejoin="round"/>',
+  cloud:
+    '<path d="M7 18a4 4 0 0 1 .4-8 5.5 5.5 0 0 1 10.6 1.3A3.6 3.6 0 0 1 17.5 18z" stroke-linecap="round" stroke-linejoin="round"/>',
+  people:
+    '<circle cx="9" cy="9" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M16 7a3 3 0 0 1 0 6M16.5 19a5.5 5.5 0 0 0-2-4.3" stroke-linecap="round"/>',
+  // strengths
+  flow: '<path d="M4 7h9M4 12h16M4 17h11" stroke-linecap="round"/><circle cx="18" cy="7" r="2"/><circle cx="17" cy="17" r="2"/>',
+  shield:
+    '<path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>',
+  spark:
+    '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" stroke-linejoin="round"/>',
+  // culture
+  growth:
+    '<path d="M4 19h16M7 19v-6M12 19V8M17 19v-9" stroke-linecap="round"/><path d="M5 9l5-4 4 3 5-5" stroke-linecap="round" stroke-linejoin="round"/>',
+  team: '<circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M3 19a5 5 0 0 1 10 0M13 19a5 5 0 0 1 8-4" stroke-linecap="round"/>',
+  balance:
+    '<path d="M12 4v16M6 8h12M6 8l-3 6a3 3 0 0 0 6 0zM18 8l-3 6a3 3 0 0 0 6 0z" stroke-linecap="round" stroke-linejoin="round"/>',
+  // misc
+  check: '<path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/>',
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>',
+  phone:
+    '<path d="M6 3h3l2 5-2.5 1.5a11 11 0 0 0 5 5L17 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2z" stroke-linejoin="round"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6" stroke-linecap="round"/>',
+  map: '<path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5"/>',
+};
+---
+
+<svg
+  class={cls}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  aria-hidden="true"
+  set:html={paths[name] ?? ''}
+/>

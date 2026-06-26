@@ -5,8 +5,9 @@ import { HISTORY } from '../../data/site';
 
 <Base title="会社沿革" path="/company/history/" description="株式会社オアシス情報システムズの沿革をご紹介します。">
   <section class="page-hero">
-    <div class="container">
-      <h1>会社沿革<span class="en">HISTORY</span></h1>
+    <div class="container inner">
+      <span class="en">HISTORY</span>
+      <h1>会社沿革</h1>
     </div>
   </section>
 
@@ -16,14 +17,17 @@ import { HISTORY } from '../../data/site';
     </nav>
   </div>
 
-  <section class="section" style="padding-top: clamp(20px, 4vw, 40px)">
+  <section class="section" style="padding-top: clamp(24px, 4vw, 44px)">
     <div class="container">
       <ol class="timeline">
         {HISTORY.map((h) => (
           <li class="timeline-item reveal">
             <span class="timeline-dot" aria-hidden="true"></span>
-            <div class="timeline-year">{h.year}</div>
-            <div class="timeline-text">{h.text}</div>
+            <div class="timeline-year">
+              <span class="ty-year">{h.year}</span>
+              {h.month && <span class="ty-month">{h.month}</span>}
+            </div>
+            <div class="timeline-card">{h.text}</div>
           </li>
         ))}
       </ol>
@@ -40,29 +44,30 @@ import { HISTORY } from '../../data/site';
     list-style: none;
     margin: 0 auto;
     padding: 0;
-    max-width: 760px;
+    max-width: 780px;
     position: relative;
   }
   .timeline::before {
     content: "";
     position: absolute;
     left: 9px;
-    top: 6px;
-    bottom: 6px;
+    top: 8px;
+    bottom: 8px;
     width: 2px;
-    background: var(--line);
+    background: linear-gradient(var(--blue), var(--green));
   }
   .timeline-item {
     position: relative;
     display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 20px;
-    padding: 0 0 30px 40px;
+    grid-template-columns: 150px 1fr;
+    gap: 24px;
+    padding: 0 0 26px 40px;
+    align-items: start;
   }
   .timeline-dot {
     position: absolute;
     left: 2px;
-    top: 6px;
+    top: 22px;
     width: 16px;
     height: 16px;
     border-radius: 50%;
@@ -71,22 +76,29 @@ import { HISTORY } from '../../data/site';
     box-shadow: 0 0 0 2px var(--green);
   }
   .timeline-year {
-    font-weight: 700;
-    color: var(--blue-dark);
+    padding-top: 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
   }
-  .timeline-text {
+  .ty-year { font-weight: 800; font-size: 1.4rem; color: var(--blue-d); letter-spacing: -0.01em; }
+  .ty-month { font-weight: 700; color: var(--green-d); font-size: 0.9rem; }
+  .timeline-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px 22px;
     color: var(--ink-soft);
+    box-shadow: var(--shadow-sm);
   }
   .note {
-    max-width: 760px;
+    max-width: 780px;
     margin: 1.5em auto 0;
     color: var(--muted);
     font-size: 0.85rem;
   }
   @media (max-width: 600px) {
-    .timeline-item {
-      grid-template-columns: 1fr;
-      gap: 4px;
-    }
+    .timeline-item { grid-template-columns: 1fr; gap: 8px; padding-left: 36px; }
+    .timeline-year { padding-top: 0; }
   }
 </style>
