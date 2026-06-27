@@ -2,9 +2,11 @@ name: Preview (GitHub Pages)
 
 # プレビュー用の公開サイトを GitHub Pages に公開します。
 # 公開URL: https://leesanxz.github.io/oasis_home/
-# ※ 事前にリポジトリ設定で Pages を有効化（Source: GitHub Actions）してください。
-#   有効化後に手動実行（Actions → Preview (GitHub Pages) → Run workflow）で公開します。
+# 対象ブランチへの push、または手動実行で公開します。
 on:
+  push:
+    branches:
+      - claude/oasis-site-renewal-1ttukj
   workflow_dispatch:
 
 permissions:
