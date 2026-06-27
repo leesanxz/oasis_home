@@ -6,6 +6,7 @@ name: Preview (GitHub Pages)
 on:
   push:
     branches:
+      - main
       - claude/oasis-site-renewal-1ttukj
   workflow_dispatch:
 
