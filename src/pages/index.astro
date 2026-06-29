@@ -94,6 +94,10 @@ const companyRows: { th: string; td: string }[] = [
           <div><b>クラウド活用</b><span>柔軟でコスト効率の高い基盤を実現</span></div>
           <div><b>人材ネットワーク</b><span>最適なエンジニアで開発を支援</span></div>
         </div>
+        <p class="about-more">
+          <a href="#philosophy" class="btn btn--grad">会社理念を見る<Icon name="arrow" size={18} /></a>
+          {/* ページ内アンカーは base 不要 */}
+        </p>
       </div>
     </div>
   </section>
@@ -244,7 +248,7 @@ const companyRows: { th: string; td: string }[] = [
             </tbody>
           </table>
           <p class="company-more">
-            <a href={url('/company/history/')} class="btn btn--outline">会社沿革を見る<Icon name="arrow" size={18} /></a>
+            <a href={url('/company/history/')} class="btn btn--grad">会社沿革を見る<Icon name="arrow" size={18} /></a>
           </p>
         </div>
         <aside class="access-card reveal" data-delay="1">
@@ -376,6 +380,7 @@ const companyRows: { th: string; td: string }[] = [
   }
   .about-points b { color: var(--ink); }
   .about-points span { font-size: 0.9rem; color: var(--muted); }
+  .about-more { margin-top: 1.8em; }
   @media (max-width: 880px) {
     .about-grid { grid-template-columns: 1fr; }
     .about-art-wrap { order: 2; margin-inline: auto; }
