@@ -8,6 +8,11 @@ import {
 } from '../data/site';
 import { url } from '../utils/url';
 
+// 地図（Googleマップ。APIキー不要の埋め込み＋外部リンク）
+const mapQuery = encodeURIComponent(`${COMPANY.addressLine1} ${COMPANY.addressLine2}`);
+const mapEmbed = `https://maps.google.com/maps?q=${mapQuery}&z=16&hl=ja&output=embed`;
+const mapLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
 const serviceIcons: Record<string, string> = {
   software: 'code',
   cloud: 'cloud',
@@ -195,17 +200,18 @@ const companyRows: { th: string; td: string }[] = [
           <h3><Icon name="map" size={20} /> アクセス</h3>
           <p class="ac-addr">〒{COMPANY.postalCode}<br />{COMPANY.addressLine1}<br />{COMPANY.addressLine2}</p>
           <p class="ac-note">{COMPANY.access}</p>
-          <div class="ac-map" aria-hidden="true">
-            <svg viewBox="0 0 300 160" fill="none">
-              <rect width="300" height="160" rx="14" fill="#eef6fb"/>
-              <path d="M0 60h300M0 110h300M90 0v160M200 0v160" stroke="#d9ecf7" stroke-width="6"/>
-              <path d="M40 30h60v40H40z" fill="#dceefa"/>
-              <path d="M220 90h50v50h-50z" fill="#e7f3d6"/>
-              <circle cx="150" cy="85" r="13" fill="#2A86C0"/>
-              <path d="M150 110c8-12 13-18 13-25a13 13 0 0 0-26 0c0 7 5 13 13 25z" fill="#2A86C0"/>
-              <circle cx="150" cy="85" r="5" fill="#fff"/>
-            </svg>
+          <div class="ac-map">
+            <iframe
+              src={mapEmbed}
+              title={`${COMPANY.name} 所在地の地図`}
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
           </div>
+          <a href={mapLink} target="_blank" rel="noopener" class="ac-maplink">
+            <Icon name="map" size={16} /> Googleマップで開く
+          </a>
           <a href={`tel:${COMPANY.tel.replaceAll('-', '')}`} class="ac-tel"><Icon name="phone" size={18} /> {COMPANY.tel}</a>
         </aside>
       </div>
@@ -516,8 +522,27 @@ const companyRows: { th: string; td: string }[] = [
   .access-card h3 :global(svg) { color: var(--green-d); }
   .ac-addr { margin-top: 1em; font-weight: 600; line-height: 1.8; }
   .ac-note { font-size: 0.86rem; color: var(--muted); }
-  .ac-map { border-radius: 14px; overflow: hidden; margin: 4px 0 16px; }
-  .ac-map svg { width: 100%; height: auto; display: block; }
+  .ac-map {
+    border-radius: 14px;
+    overflow: hidden;
+    margin: 4px 0 12px;
+    border: 1px solid var(--line);
+  }
+  .ac-map iframe {
+    width: 100%;
+    height: 200px;
+    border: 0;
+    display: block;
+  }
+  .ac-maplink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .ac-maplink :global(svg) { color: var(--green-d); }
   .ac-tel {
     display: inline-flex;
     align-items: center;
