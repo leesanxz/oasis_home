@@ -271,8 +271,9 @@ p {
   position: relative;
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
   color: #fff;
-  padding-top: calc(var(--header-h) + clamp(54px, 8vw, 88px));
-  padding-bottom: clamp(66px, 9vw, 104px);
+  /* コンパクトな見出し帯。ヘッダー分のオフセット＋上下の余白を抑えめに。 */
+  padding-top: calc(var(--header-h) + clamp(28px, 4vw, 44px));
+  padding-bottom: clamp(34px, 4vw, 52px);
   text-align: center;
   overflow: hidden;
 }
