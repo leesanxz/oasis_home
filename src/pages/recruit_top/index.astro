@@ -29,7 +29,8 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
           新しい仲間として、あなたの力を発揮してください。
         </p>
         <p class="recruit-types reveal">
-          <span>キャリア採用</span><span>新卒採用</span>
+          <a href="#requirements" data-job="career">キャリア採用</a>
+          <a href="#requirements" data-job="newgrad">新卒採用</a>
         </p>
       </div>
     </div>
@@ -179,16 +180,28 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
     gap: 12px;
     margin-top: 1.4em;
   }
-  .recruit-types span {
+  .recruit-types a {
     display: inline-flex;
     align-items: center;
+    gap: 6px;
     background: var(--blue-soft);
     color: var(--blue-d);
     border: 1px solid #d9ecf7;
     border-radius: 999px;
-    padding: 8px 22px;
+    padding: 9px 24px;
     font-weight: 700;
     font-size: 0.92rem;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  }
+  .recruit-types a::after {
+    content: "↓";
+    font-size: 0.85em;
+    opacity: 0.7;
+  }
+  .recruit-types a:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-2px);
   }
 
   /* 求める人物像 */
@@ -356,3 +369,13 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
     .apply-box { grid-template-columns: 1fr; }
   }
 </style>
+
+<script>
+  // MESSAGE下のボタン → 募集要項の該当タブを表示してスクロール
+  document.querySelectorAll('.recruit-types a[data-job]').forEach((a) => {
+    a.addEventListener('click', () => {
+      const radio = document.getElementById('job-' + a.getAttribute('data-job')) as HTMLInputElement | null;
+      if (radio) radio.checked = true;
+    });
+  });
+</script>
