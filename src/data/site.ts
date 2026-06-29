@@ -126,11 +126,17 @@ export const PROCESS = [
   { no: '04', title: '納品・運用保守', text: 'リリース後も継続的に運用・保守を支援し、改善を続けます。' },
 ] as const;
 
-// 対応技術の例 [案]
-export const TECHS = [
-  'Java', 'Python', 'PHP', 'JavaScript', 'TypeScript', 'C# / .NET',
-  'React', 'Vue', 'Node.js', 'AWS', 'Azure', 'Google Cloud',
-  'Docker', 'Linux', 'MySQL', 'PostgreSQL',
+// 対応技術（カテゴリ別）[案] ※実際の対応範囲に合わせて調整してください
+export const TECH_GROUPS = [
+  { category: '言語', items: ['Java', 'Python', 'PHP', 'JavaScript', 'TypeScript', 'C# / .NET'] },
+  { category: 'フレームワーク / ライブラリ', items: ['React', 'Vue.js', 'Node.js', 'Spring', 'Laravel'] },
+  { category: 'クラウド / インフラ', items: ['AWS', 'Microsoft Azure', 'Google Cloud', 'Docker', 'Linux'] },
+  { category: 'データベース', items: ['MySQL', 'PostgreSQL', 'Oracle', 'SQL Server'] },
+  {
+    category: 'AI / データ活用',
+    accent: true,
+    items: ['生成AI・LLM活用', '機械学習（ML）', '自然言語処理（NLP）', 'RAG / AIエージェント', 'データ分析'],
+  },
 ] as const;
 
 // 採用: 働く環境・カルチャー [案]

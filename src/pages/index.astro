@@ -4,7 +4,7 @@ import Icon from '../components/Icon.astro';
 import HeroArt from '../components/HeroArt.astro';
 import AboutArt from '../components/AboutArt.astro';
 import {
-  COMPANY, SERVICES, STATS, STRENGTHS, PROCESS, TECHS,
+  COMPANY, SERVICES, STATS, STRENGTHS, PROCESS, TECH_GROUPS,
 } from '../data/site';
 import { url } from '../utils/url';
 
@@ -168,10 +168,17 @@ const companyRows: { th: string; td: string }[] = [
       <div class="section-head reveal">
         <span class="eyebrow">TECHNOLOGY</span>
         <h2>対応技術</h2>
-        <p class="lead">幅広い技術スタックに対応します（対応技術の一例）。</p>
+        <p class="lead">言語からクラウド、AIまで。幅広い技術スタックに対応します（対応技術の一例）。</p>
       </div>
-      <div class="tech-cloud reveal">
-        {TECHS.map((t) => <span class="tech-chip">{t}</span>)}
+      <div class="tech-groups">
+        {TECH_GROUPS.map((g) => (
+          <div class:list={['tech-group', 'reveal', { 'is-accent': (g as any).accent }]}>
+            <div class="tg-label">{g.category}</div>
+            <div class="tg-chips">
+              {g.items.map((t) => <span class="tech-chip">{t}</span>)}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -458,26 +465,70 @@ const companyRows: { th: string; td: string }[] = [
     .process-step::after { display: none !important; }
   }
 
-  /* ---- tech ---- */
-  .tech-cloud {
+  /* ---- tech (カテゴリ別) ---- */
+  .tech-groups {
+    max-width: 900px;
+    margin-inline: auto;
+    display: grid;
+    gap: 4px;
+  }
+  .tech-group {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    align-items: center;
+    padding: 20px 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tech-group:last-child { border-bottom: none; }
+  .tg-label {
+    font-weight: 700;
+    color: var(--blue-d);
+    font-size: 0.96rem;
+  }
+  .tg-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    max-width: 820px;
-    margin-inline: auto;
+    gap: 10px;
   }
   .tech-chip {
     background: #fff;
     border: 1px solid var(--line);
     border-radius: 999px;
-    padding: 10px 22px;
+    padding: 9px 18px;
     font-weight: 600;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     color: var(--ink-soft);
     transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   }
   .tech-chip:hover { transform: translateY(-3px); border-color: var(--blue); color: var(--blue); }
+
+  /* AI カテゴリは強調 */
+  .tech-group.is-accent {
+    background: linear-gradient(180deg, rgba(152, 199, 39, 0.06), rgba(42, 134, 192, 0.04));
+    border-radius: 16px;
+    border-bottom: none;
+    padding-inline: 20px;
+    margin-top: 8px;
+  }
+  .tech-group.is-accent .tg-label { color: var(--green-d); }
+  .tech-group.is-accent .tech-chip {
+    border-color: #d4e8a8;
+    color: var(--green-d);
+    background: #fff;
+  }
+  .tech-group.is-accent .tech-chip:hover {
+    border-color: var(--green-d);
+    color: var(--green-d);
+  }
+
+  @media (max-width: 640px) {
+    .tech-group {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 16px 8px;
+    }
+  }
 
   /* ---- company ---- */
   .company-grid {
