@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { FORM } from '../../data/site';
 import { url } from '../../utils/url';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
 const endpoint = url(FORM.endpoint);
 ---
@@ -19,9 +20,7 @@ const endpoint = url(FORM.endpoint);
   </section>
 
   <div class="container">
-    <nav class="breadcrumb" aria-label="パンくず">
-      <a href={url('/')}>ホーム</a> ／ <a href={url('/recruit_top/')}>採用情報</a> ／ <span>オンライン応募</span>
-    </nav>
+    <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: '採用情報', href: '/recruit_top/' }, { label: 'オンライン応募' }]} />
   </div>
 
   <section class="section" style="padding-top: clamp(20px, 4vw, 40px)">

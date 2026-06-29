@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import { COMPANY, CULTURE } from '../../data/site';
 import { url } from '../../utils/url';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 ---
 
 <Base title="採用情報" path="/recruit_top/" description="株式会社オアシス情報システムズの採用情報。一緒に未来をつくる仲間を募集しています。">
@@ -14,9 +15,7 @@ import { url } from '../../utils/url';
   </section>
 
   <div class="container">
-    <nav class="breadcrumb" aria-label="パンくず">
-      <a href={url('/')}>ホーム</a> ／ <span>採用情報</span>
-    </nav>
+    <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: '採用情報' }]} />
   </div>
 
   <!-- message -->

@@ -1,0 +1,30 @@
+---
+import { url } from '../utils/url';
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+const { items } = Astro.props as { items: Crumb[] };
+---
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    {items.map((c, i) => (
+      <li>
+        {c.href ? (
+          <a href={url(c.href)}>
+            {i === 0 && (
+              <svg class="bc-home" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M3 11l9-7 9 7M5 10v9h5v-6h4v6h5v-9" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            )}
+            {c.label}
+          </a>
+        ) : (
+          <span aria-current="page">{c.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

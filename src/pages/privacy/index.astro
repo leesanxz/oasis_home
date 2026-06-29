@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { COMPANY } from '../../data/site';
 import { url } from '../../utils/url';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
 // 出典: public/docs/ の各PDF（個人情報保護方針／公表文／採用応募時の取扱い）を本文化。
 
@@ -51,9 +52,7 @@ const recruitItems = [
   </section>
 
   <div class="container">
-    <nav class="breadcrumb" aria-label="パンくず">
-      <a href={url('/')}>ホーム</a> ／ <span>個人情報保護方針</span>
-    </nav>
+    <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: '個人情報保護方針' }]} />
   </div>
 
   <section class="section" style="padding-top: clamp(20px, 4vw, 40px)">
