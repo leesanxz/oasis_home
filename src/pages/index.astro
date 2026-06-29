@@ -15,7 +15,7 @@ const mapLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
 const serviceIcons: Record<string, string> = {
   software: 'code',
-  operation: 'gear',
+  cloud: 'cloud',
   resource: 'people',
 };
 
@@ -40,7 +40,7 @@ const companyRows: { th: string; td: string }[] = [
         <span class="chip"><span class="dot"></span>株式会社<span class="grad-text">オアシス情報システムズ</span></span>
         <h1>情報技術で、<br />ビジネスに<span class="grad-text">潤い</span>を。</h1>
         <p class="hero-lead">
-          ソフトウェア開発・システム運用・人材リソース。3つの力で、お客様の事業に確かな成長の源泉を届けるITパートナーです。
+          ソフトウェア開発・クラウド・人材リソース。3つの力で、お客様の事業に確かな成長の源泉を届けるITパートナーです。
         </p>
         <div class="hero-actions">
           <a href="#services" class="btn btn--grad">事業内容を見る<Icon name="arrow" size={18} /></a>
@@ -86,11 +86,11 @@ const companyRows: { th: string; td: string }[] = [
           私たちオアシス情報システムズは、確かな技術と人の力で、お客様の事業の成長を支えるITパートナーです。
         </p>
         <p>
-          ソフトウェア開発・システム運用・人材リソースの3領域を提供し、上流の提案から開発・運用保守まで切れ目なく伴走。長く寄り添える関係づくりを大切にしています。
+          ソフトウェア開発・クラウド・人材リソースの3領域を提供し、上流の提案から開発・運用まで切れ目なく伴走。長く寄り添える関係づくりを大切にしています。
         </p>
         <div class="about-points">
           <div><b>確かな開発力</b><span>提案・設計から運用保守まで一貫対応</span></div>
-          <div><b>安定した運用</b><span>システム全体の運用・保守・改善を支援</span></div>
+          <div><b>クラウド活用</b><span>柔軟でコスト効率の高い基盤を実現</span></div>
           <div><b>人材ネットワーク</b><span>最適なエンジニアで開発を支援</span></div>
         </div>
       </div>
@@ -103,12 +103,16 @@ const companyRows: { th: string; td: string }[] = [
       <div class="section-head reveal">
         <span class="eyebrow">PHILOSOPHY</span>
         <h2>会社理念</h2>
+        <p class="lead">{PHILOSOPHY.lead}</p>
       </div>
       <ul class="philosophy-list">
-        {PHILOSOPHY.map((t, i) => (
+        {PHILOSOPHY.items.map((p, i) => (
           <li class="philosophy-item reveal" data-delay={i}>
             <span class="ph-num">{String(i + 1).padStart(2, '0')}</span>
-            <p>{t}</p>
+            <div class="ph-body">
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+            </div>
           </li>
         ))}
       </ul>
@@ -400,15 +404,21 @@ const companyRows: { th: string; td: string }[] = [
     background-clip: text;
     color: transparent;
   }
-  .philosophy-item p {
+  .ph-body h3 {
+    font-size: 1.12rem;
+    color: var(--blue-d);
+    margin-bottom: 0.35em;
+  }
+  .ph-body p {
     margin: 0;
-    color: var(--ink);
-    font-weight: 600;
-    font-size: 1.02rem;
+    color: var(--ink-soft);
+    font-weight: 500;
+    font-size: 0.97rem;
+    line-height: 1.8;
   }
   @media (max-width: 560px) {
     .philosophy-item { gap: 16px; padding: 20px 22px; }
-    .philosophy-item p { font-size: 0.96rem; }
+    .ph-body p { font-size: 0.92rem; }
   }
 
   /* ---- message（代表ごあいさつ） ---- */
