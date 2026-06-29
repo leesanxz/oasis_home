@@ -168,11 +168,11 @@ const companyRows: { th: string; td: string }[] = [
       <div class="section-head reveal">
         <span class="eyebrow">TECHNOLOGY</span>
         <h2>対応技術</h2>
-        <p class="lead">言語からクラウド、AIまで。幅広い技術スタックに対応します（対応技術の一例）。</p>
+        <p class="lead">幅広い技術スタックに対応します（一例）。</p>
       </div>
       <div class="tech-groups">
         {TECH_GROUPS.map((g) => (
-          <div class:list={['tech-group', 'reveal', { 'is-accent': (g as any).accent }]}>
+          <div class="tech-group reveal">
             <div class="tg-label">{g.category}</div>
             <div class="tg-chips">
               {g.items.map((t) => <span class="tech-chip">{t}</span>)}
@@ -502,25 +502,6 @@ const companyRows: { th: string; td: string }[] = [
     transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   }
   .tech-chip:hover { transform: translateY(-3px); border-color: var(--blue); color: var(--blue); }
-
-  /* AI カテゴリは強調 */
-  .tech-group.is-accent {
-    background: linear-gradient(180deg, rgba(152, 199, 39, 0.06), rgba(42, 134, 192, 0.04));
-    border-radius: 16px;
-    border-bottom: none;
-    padding-inline: 20px;
-    margin-top: 8px;
-  }
-  .tech-group.is-accent .tg-label { color: var(--green-d); }
-  .tech-group.is-accent .tech-chip {
-    border-color: #d4e8a8;
-    color: var(--green-d);
-    background: #fff;
-  }
-  .tech-group.is-accent .tech-chip:hover {
-    border-color: var(--green-d);
-    color: var(--green-d);
-  }
 
   @media (max-width: 640px) {
     .tech-group {

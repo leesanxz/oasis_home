@@ -134,7 +134,6 @@ export const TECH_GROUPS = [
   { category: 'データベース', items: ['MySQL', 'PostgreSQL', 'Oracle', 'SQL Server'] },
   {
     category: 'AI / データ活用',
-    accent: true,
     items: ['生成AI・LLM活用', '機械学習（ML）', '自然言語処理（NLP）', 'RAG / AIエージェント', 'データ分析'],
   },
 ] as const;
