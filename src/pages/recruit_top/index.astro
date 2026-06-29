@@ -12,7 +12,7 @@ const contactHtml =
   `TEL：<a href="${telHref}">${RECRUIT_CONTACT.tel}</a><br>` +
   `Mail：<a href="mailto:${RECRUIT_CONTACT.email}">${RECRUIT_CONTACT.email}</a>`;
 const applyHtml =
-  `<a class="job-apply-link" href="${url('/recruit_top/subscription/')}">オンライン応募ページへ →</a>`;
+  `<a class="btn btn--grad btn--sm" href="${url('/recruit_top/subscription/')}">オンライン応募ページへ →</a>`;
 
 const jobs = JOB_OPENINGS.map((job) => ({
   id: job.id,
@@ -303,11 +303,6 @@ const jobs = JOB_OPENINGS.map((job) => ({
   #job-newgrad:checked ~ .job-panels .job-panel-newgrad {
     display: block;
   }
-  .job-apply-link {
-    font-weight: 700;
-    color: var(--blue-d);
-  }
-  .job-apply-link:hover { color: var(--blue); }
   .job-table {
     width: 100%;
     border-collapse: collapse;

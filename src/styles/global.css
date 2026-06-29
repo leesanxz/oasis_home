@@ -185,6 +185,11 @@ p {
   color: #fff;
   transform: translateY(-2px);
 }
+/* 小サイズ（表の中など、限られたスペース向け） */
+.btn--sm {
+  padding: 0.58em 1.3em;
+  font-size: 0.88rem;
+}
 
 /* ---------- chip ---------- */
 .chip {
