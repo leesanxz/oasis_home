@@ -1,0 +1,209 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { COMPANY, FORM } from '../../data/site';
+import { url } from '../../utils/url';
+
+const endpoint = url(FORM.contactEndpoint);
+---
+
+<Base
+  title="お問い合わせ"
+  path="/contact/"
+  description="株式会社オアシス情報システムズへのお問い合わせはこちらから。"
+>
+  <section class="page-hero">
+    <div class="container inner">
+      <span class="en">CONTACT</span>
+      <h1>お問い合わせ</h1>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: 'お問い合わせ' }]} />
+  </div>
+
+  <section class="section" style="padding-top: clamp(20px, 4vw, 40px)">
+    <div class="container">
+      <div class="contact-intro reveal">
+        <p>
+          サービスに関するご相談・ご質問など、お気軽にお問い合わせください。<br />
+          <span class="req-note"><span class="req">*</span> は必須項目です。</span>
+        </p>
+        <p class="contact-tels">
+          <a href={`tel:${COMPANY.tel.replaceAll('-', '')}`}><Icon name="phone" size={16} /> {COMPANY.tel}</a>
+          <span class="ct-note">（受付時間内はお電話でも承ります）</span>
+        </p>
+      </div>
+
+      <form id="contact-form" class="entry-form reveal" method="POST" action={endpoint} novalidate>
+        <div class="hp" aria-hidden="true">
+          <label>会社名<input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <div class="field">
+          <label for="name">お名前 <span class="req">*</span></label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
+        </div>
+
+        <div class="field">
+          <label for="email">メールアドレス <span class="req">*</span></label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+        </div>
+
+        <div class="field">
+          <label for="subject">表題 <span class="req">*</span></label>
+          <input type="text" id="subject" name="subject" required />
+        </div>
+
+        <div class="field">
+          <label for="message">お問い合わせ内容 <span class="req">*</span></label>
+          <textarea id="message" name="message" rows="7" required></textarea>
+        </div>
+
+        <div class="field field-check">
+          <label>
+            <input type="checkbox" id="agree" name="agree" value="同意する" required />
+            <span>
+              <a href={url('/privacy/')} target="_blank" rel="noopener">個人情報の取扱い</a>について同意する
+              <span class="req">*</span>
+            </span>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn--grad" id="submit-btn">送信する</button>
+        </div>
+
+        <p class="form-status" id="form-status" role="alert" aria-live="polite" hidden></p>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-intro {
+    max-width: 720px;
+    margin: 0 auto 1.6em;
+    text-align: center;
+  }
+  .req { color: #d8453b; font-weight: 700; }
+  .req-note { font-size: 0.88rem; color: var(--muted); }
+  .contact-tels {
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .contact-tels a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+  .contact-tels a :global(svg) { color: var(--green-d); }
+  .ct-note { font-size: 0.82rem; color: var(--muted); }
+
+  .entry-form {
+    max-width: 720px;
+    margin-inline: auto;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: clamp(28px, 4vw, 44px);
+  }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .field { margin-bottom: 1.4em; }
+  .field label { display: block; font-weight: 600; margin-bottom: 0.5em; font-size: 0.94rem; }
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 0.8em 1em;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    background: #fff;
+    color: var(--ink);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(42, 134, 192, 0.15);
+  }
+  .field textarea { resize: vertical; }
+  .field-check label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6em;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .field-check input { width: auto; margin-top: 0.35em; }
+  .form-actions { text-align: center; margin-top: 1.8em; }
+  .form-status {
+    margin-top: 1.2em;
+    text-align: center;
+    padding: 0.9em 1em;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .form-status.is-error { background: #fdecea; color: #b3261e; }
+  .form-status.is-success { background: #eaf7e8; color: #2e7d32; }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status') as HTMLElement | null;
+  const btn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+
+  const show = (msg: string, type: 'error' | 'success') => {
+    if (!status) return;
+    status.textContent = msg;
+    status.className = `form-status is-${type}`;
+    status.hidden = false;
+  };
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const endpoint = form.getAttribute('action') || '';
+    if (btn) { btn.disabled = true; btn.textContent = '送信中…'; }
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      let data: any = null;
+      try { data = await res.json(); } catch (_) {}
+
+      if (res.ok && data && data.ok) {
+        form.reset();
+        show(data.message || 'お問い合わせありがとうございます。送信しました。', 'success');
+        if (btn) btn.style.display = 'none';
+      } else {
+        show((data && data.message) || '送信に失敗しました。時間をおいて再度お試しください。', 'error');
+      }
+    } catch {
+      show('通信エラーが発生しました。時間をおいて再度お試しください。', 'error');
+    } finally {
+      if (btn && btn.style.display !== 'none') {
+        btn.disabled = false;
+        btn.textContent = '送信する';
+      }
+    }
+  });
+</script>

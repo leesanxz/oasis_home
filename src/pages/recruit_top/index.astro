@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
-import { COMPANY, CULTURE, IDEAL } from '../../data/site';
+import { COMPANY, CULTURE, IDEAL, JOB_OPENINGS, RECRUIT_CONTACT } from '../../data/site';
 import { url } from '../../utils/url';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 ---
@@ -76,8 +76,54 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
     </div>
   </section>
 
+  <!-- 募集要項 -->
+  <section class="section section--soft" id="requirements">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">REQUIREMENTS</span>
+        <h2>募集要項</h2>
+        <p class="lead">キャリア採用・新卒採用ともに募集しています。タブで切り替えてご覧ください。</p>
+      </div>
+
+      <div class="job-tabs reveal">
+        {JOB_OPENINGS.map((job, i) => (
+          <input type="radio" name="job-tab" id={`job-${job.id}`} checked={i === 0} />
+        ))}
+        <div class="job-tablist" role="tablist">
+          {JOB_OPENINGS.map((job) => (
+            <label class="job-tab" for={`job-${job.id}`}>{job.label}</label>
+          ))}
+        </div>
+        <div class="job-panels">
+          {JOB_OPENINGS.map((job) => (
+            <div class={`job-panel job-panel-${job.id}`}>
+              <table class="job-table">
+                <tbody>
+                  {job.rows.map((r) => (
+                    <tr>
+                      <th scope="row">{r.th}</th>
+                      <td>{r.td.split('\n').map((line, idx) => (idx === 0 ? line : [<br />, line]))}</td>
+                    </tr>
+                  ))}
+                  <tr>
+                    <th scope="row">連絡先</th>
+                    <td>
+                      TEL：<a href={`tel:${RECRUIT_CONTACT.tel.replaceAll('-', '')}`}>{RECRUIT_CONTACT.tel}</a><br />
+                      Mail：<a href={`mailto:${RECRUIT_CONTACT.email}`}>{RECRUIT_CONTACT.email}</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p class="job-note reveal">※ 記載の条件は募集時点のものです。最新の募集状況は、オンライン応募またはお問い合わせよりご確認ください。</p>
+    </div>
+  </section>
+
   <!-- apply -->
-  <section class="section section--soft">
+  <section class="section">
     <div class="container">
       <div class="apply-box reveal">
         <div class="apply-text">
@@ -96,8 +142,8 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
         </div>
         <div class="apply-actions">
           <a href={url('/recruit_top/subscription/')} class="btn btn--grad">オンライン応募へ<Icon name="arrow" size={18} /></a>
-          <a href={`tel:${COMPANY.tel.replaceAll('-', '')}`} class="apply-tel">
-            <Icon name="phone" size={18} /> {COMPANY.tel}
+          <a href={`tel:${RECRUIT_CONTACT.tel.replaceAll('-', '')}`} class="apply-tel">
+            <Icon name="phone" size={18} /> {RECRUIT_CONTACT.tel}
           </a>
         </div>
       </div>
@@ -187,6 +233,99 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
   }
   @media (max-width: 640px) {
     .ideal-list { grid-template-columns: 1fr; }
+  }
+
+  /* 募集要項（タブ切替・CSSのみ） */
+  .job-tabs {
+    max-width: 840px;
+    margin: 0 auto;
+  }
+  .job-tabs > input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .job-tablist {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 26px;
+  }
+  .job-tab {
+    cursor: pointer;
+    padding: 12px 30px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--muted);
+    background: #fff;
+    border: 1px solid var(--line);
+    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+  .job-tab:hover {
+    color: var(--blue);
+  }
+  .job-panel {
+    display: none;
+  }
+  #job-career:checked ~ .job-tablist label[for='job-career'],
+  #job-newgrad:checked ~ .job-tablist label[for='job-newgrad'] {
+    background: var(--grad);
+    color: #fff;
+    border-color: transparent;
+  }
+  #job-career:checked ~ .job-panels .job-panel-career,
+  #job-newgrad:checked ~ .job-panels .job-panel-newgrad {
+    display: block;
+  }
+  .job-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .job-table th,
+  .job-table td {
+    border-bottom: 1px solid var(--line);
+    padding: 16px 20px;
+    text-align: left;
+    vertical-align: top;
+    font-size: 0.94rem;
+    line-height: 1.8;
+  }
+  .job-table tr:last-child th,
+  .job-table tr:last-child td {
+    border-bottom: none;
+  }
+  .job-table th {
+    width: 28%;
+    background: var(--soft);
+    color: var(--blue-d);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .job-table td {
+    color: var(--ink-soft);
+  }
+  .job-note {
+    max-width: 840px;
+    margin: 1.4em auto 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  @media (max-width: 600px) {
+    .job-table th {
+      width: 36%;
+      white-space: normal;
+    }
+    .job-table th,
+    .job-table td {
+      padding: 12px 14px;
+      font-size: 0.9rem;
+    }
   }
 
   .apply-box {

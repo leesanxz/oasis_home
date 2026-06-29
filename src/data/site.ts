@@ -177,6 +177,54 @@ export const IDEAL = [
   '新しい技術に前向きに挑戦したい方',
 ] as const;
 
+// 採用の連絡先（現行サイト 採用ページより。採用専用番号）[実]
+export const RECRUIT_CONTACT = {
+  tel: '03-5858-6714',
+  email: 'info@oasisis.co.jp',
+} as const;
+
+// 募集要項（現行サイト「キャリア採用」「新卒採用」より）[実]
+// ※ 給与・人数等は募集時点の条件のため、最新内容は要確認。
+export const JOB_OPENINGS = [
+  {
+    id: 'career',
+    label: 'キャリア採用',
+    rows: [
+      { th: '募集職種', td: 'システムエンジニア・プログラマ・テスター' },
+      {
+        th: '対象者',
+        td: 'Javaでのオープン系ソフトウェア開発経験を2年以上お持ちの方\nPHP・C・C++での開発経験を2年以上お持ちの方\n※上記の経験がない方でも、IT業界に興味をお持ちの方は応募可能です。',
+      },
+      { th: '採用人数', td: '5名程度' },
+      { th: '選考方法', td: '書類選考、面接' },
+      { th: '勤務地', td: '首都圏（東京都・神奈川県・千葉県）' },
+      { th: '勤務時間', td: '9:30〜18:30　※プロジェクトにより多少変わります。' },
+      { th: '給与', td: '月給 30万円〜70万円\nこれまでのご経歴・年収をもとに決定いたします。' },
+      {
+        th: '休日・休暇',
+        td: '完全週休2日（土日）、祝日、年末年始・夏季休暇\n有給休暇（初年度10日、以降法定通り）',
+      },
+    ],
+  },
+  {
+    id: 'newgrad',
+    label: '新卒採用',
+    rows: [
+      { th: '募集職種', td: 'システムエンジニア・プログラマ・テスター' },
+      { th: '対象者', td: '理系専門学校卒／理系大学卒／理系大学院卒' },
+      { th: '採用人数', td: '2名程度' },
+      { th: '選考方法', td: '書類選考、面接' },
+      { th: '勤務地', td: '首都圏（東京都・神奈川県・千葉県）' },
+      { th: '勤務時間', td: '9:30〜18:30　※プロジェクトにより多少変わります。' },
+      { th: '給与', td: '月給 20万円〜35万円' },
+      {
+        th: '休日・休暇',
+        td: '完全週休2日（土日）、祝日、年末年始・夏季休暇\n有給休暇（初年度10日、以降法定通り）',
+      },
+    ],
+  },
+] as const;
+
 // 会社沿革（要確認: 旧サイトDBから取得不可。公開情報をもとに再構成）[案/実]
 export const HISTORY = [
   { year: '2017', month: '4月', text: '株式会社オアシス情報システムズを設立（東京都千代田区神田神保町）' },
@@ -189,7 +237,8 @@ export const HISTORY = [
 // ※ public/form/apply.php が処理。送信先は apply.php 内の $TO（info@oasisis.co.jp）。
 //   XServer公開後に動作（GitHub PagesではPHPが動かないため送信テスト不可）。
 export const FORM = {
-  endpoint: '/form/apply.php',
+  endpoint: '/form/apply.php', // 採用オンライン応募
+  contactEndpoint: '/form/contact.php', // 一般お問い合わせ
 } as const;
 
 // グローバルナビゲーション（URLは旧サイト構造を踏襲しSEOを維持）
@@ -199,4 +248,5 @@ export const NAV = [
   { label: '選ばれる理由', href: '/#strengths' },
   { label: '会社情報', href: '/#company' },
   { label: '採用情報', href: '/recruit_top/' },
+  { label: 'お問い合わせ', href: '/contact/' },
 ] as const;
