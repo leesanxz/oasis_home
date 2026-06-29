@@ -28,6 +28,9 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
           私たちは、確かな技術と人の力でお客様のビジネスを支えています。<br />
           新しい仲間として、あなたの力を発揮してください。
         </p>
+        <p class="recruit-types reveal">
+          <span>キャリア採用</span><span>新卒採用</span>
+        </p>
       </div>
     </div>
   </section>
@@ -123,6 +126,24 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
   }
   .culture-card h3 { font-size: 1.15rem; margin-bottom: 0.5em; }
   .culture-card p { color: var(--muted); font-size: 0.93rem; margin: 0; }
+
+  .recruit-types {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 1.4em;
+  }
+  .recruit-types span {
+    display: inline-flex;
+    align-items: center;
+    background: var(--blue-soft);
+    color: var(--blue-d);
+    border: 1px solid #d9ecf7;
+    border-radius: 999px;
+    padding: 8px 22px;
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
 
   /* 求める人物像 */
   .ideal-list {

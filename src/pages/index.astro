@@ -4,7 +4,7 @@ import Icon from '../components/Icon.astro';
 import HeroArt from '../components/HeroArt.astro';
 import AboutArt from '../components/AboutArt.astro';
 import {
-  COMPANY, SERVICES, STATS, STRENGTHS, PROCESS, TECH_GROUPS,
+  COMPANY, SERVICES, STATS, STRENGTHS, PROCESS, TECH_GROUPS, PHILOSOPHY, CEO_MESSAGE,
 } from '../data/site';
 import { url } from '../utils/url';
 
@@ -15,7 +15,7 @@ const mapLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
 const serviceIcons: Record<string, string> = {
   software: 'code',
-  cloud: 'cloud',
+  operation: 'gear',
   resource: 'people',
 };
 
@@ -40,7 +40,7 @@ const companyRows: { th: string; td: string }[] = [
         <span class="chip"><span class="dot"></span>株式会社<span class="grad-text">オアシス情報システムズ</span></span>
         <h1>情報技術で、<br />ビジネスに<span class="grad-text">潤い</span>を。</h1>
         <p class="hero-lead">
-          ソフトウェア開発・クラウド・人材リソース。3つの力で、お客様の事業に確かな成長の源泉を届けるITパートナーです。
+          ソフトウェア開発・システム運用・人材リソース。3つの力で、お客様の事業に確かな成長の源泉を届けるITパートナーです。
         </p>
         <div class="hero-actions">
           <a href="#services" class="btn btn--grad">事業内容を見る<Icon name="arrow" size={18} /></a>
@@ -86,13 +86,47 @@ const companyRows: { th: string; td: string }[] = [
           私たちオアシス情報システムズは、確かな技術と人の力で、お客様の事業の成長を支えるITパートナーです。
         </p>
         <p>
-          ソフトウェア開発・クラウド・人材リソースの3領域をワンストップで提供し、上流から運用まで切れ目なく伴走。長く寄り添える関係づくりを大切にしています。
+          ソフトウェア開発・システム運用・人材リソースの3領域を提供し、上流の提案から開発・運用保守まで切れ目なく伴走。長く寄り添える関係づくりを大切にしています。
         </p>
         <div class="about-points">
-          <div><b>確かな開発力</b><span>要件定義から運用保守まで一貫対応</span></div>
-          <div><b>クラウド活用</b><span>柔軟でコスト効率の高い基盤を実現</span></div>
+          <div><b>確かな開発力</b><span>提案・設計から運用保守まで一貫対応</span></div>
+          <div><b>安定した運用</b><span>システム全体の運用・保守・改善を支援</span></div>
           <div><b>人材ネットワーク</b><span>最適なエンジニアで開発を支援</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PHILOSOPHY（会社理念） ===================== -->
+  <section class="section section--soft" id="philosophy">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">PHILOSOPHY</span>
+        <h2>会社理念</h2>
+      </div>
+      <ul class="philosophy-list">
+        {PHILOSOPHY.map((t, i) => (
+          <li class="philosophy-item reveal" data-delay={i}>
+            <span class="ph-num">{String(i + 1).padStart(2, '0')}</span>
+            <p>{t}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== MESSAGE（代表ごあいさつ） ===================== -->
+  <section class="section" id="message">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">MESSAGE</span>
+        <h2>代表ごあいさつ</h2>
+      </div>
+      <div class="message-card reveal">
+        {CEO_MESSAGE.paragraphs.map((p) => <p>{p}</p>)}
+        <p class="message-sign">
+          {CEO_MESSAGE.title}　<strong>{CEO_MESSAGE.name}</strong>
+        </p>
       </div>
     </div>
   </section>
@@ -335,6 +369,84 @@ const companyRows: { th: string; td: string }[] = [
   @media (max-width: 880px) {
     .about-grid { grid-template-columns: 1fr; }
     .about-art-wrap { order: 2; margin-inline: auto; }
+  }
+
+  /* ---- philosophy（会社理念） ---- */
+  .philosophy-list {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 860px;
+    display: grid;
+    gap: 18px;
+  }
+  .philosophy-item {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 26px 30px;
+    box-shadow: var(--shadow-sm);
+  }
+  .ph-num {
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1;
+    flex: none;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .philosophy-item p {
+    margin: 0;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 1.02rem;
+  }
+  @media (max-width: 560px) {
+    .philosophy-item { gap: 16px; padding: 20px 22px; }
+    .philosophy-item p { font-size: 0.96rem; }
+  }
+
+  /* ---- message（代表ごあいさつ） ---- */
+  .message-card {
+    max-width: 860px;
+    margin-inline: auto;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    padding: clamp(30px, 5vw, 56px);
+    position: relative;
+  }
+  .message-card::before {
+    content: "“";
+    position: absolute;
+    top: 0.1em;
+    left: 0.3em;
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--blue-soft);
+    font-family: Georgia, serif;
+  }
+  .message-card p {
+    color: var(--ink-soft);
+    line-height: 2;
+    position: relative;
+  }
+  .message-card p:last-of-type { margin-bottom: 0; }
+  .message-sign {
+    text-align: right;
+    margin-top: 1.6em !important;
+    color: var(--ink);
+  }
+  .message-sign strong {
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    margin-left: 0.3em;
   }
 
   /* ---- services ---- */
