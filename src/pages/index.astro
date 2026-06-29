@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import HeroArt from '../components/HeroArt.astro';
 import AboutArt from '../components/AboutArt.astro';
+import CeoFigure from '../components/CeoFigure.astro';
 import {
   COMPANY, SERVICES, STATS, STRENGTHS, PROCESS, TECH_GROUPS, PHILOSOPHY, CEO_MESSAGE,
 } from '../data/site';
@@ -126,11 +127,16 @@ const companyRows: { th: string; td: string }[] = [
         <span class="eyebrow">MESSAGE</span>
         <h2>代表ごあいさつ</h2>
       </div>
-      <div class="message-card reveal">
-        {CEO_MESSAGE.paragraphs.map((p) => <p>{p}</p>)}
-        <p class="message-sign">
-          {CEO_MESSAGE.title}　<strong>{CEO_MESSAGE.name}</strong>
-        </p>
+      <div class="message-grid">
+        <div class="message-figure reveal">
+          <CeoFigure name={CEO_MESSAGE.name} title={CEO_MESSAGE.title} />
+        </div>
+        <div class="message-card reveal" data-delay="1">
+          {CEO_MESSAGE.paragraphs.map((p) => <p>{p}</p>)}
+          <p class="message-sign">
+            {CEO_MESSAGE.title}　<strong>{CEO_MESSAGE.name}</strong>
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -422,9 +428,15 @@ const companyRows: { th: string; td: string }[] = [
   }
 
   /* ---- message（代表ごあいさつ） ---- */
-  .message-card {
-    max-width: 860px;
+  .message-grid {
+    display: grid;
+    grid-template-columns: 0.72fr 1.28fr;
+    gap: clamp(28px, 4vw, 52px);
+    align-items: center;
+    max-width: 1040px;
     margin-inline: auto;
+  }
+  .message-card {
     background: #fff;
     border: 1px solid var(--line);
     border-radius: var(--radius-xl);
@@ -457,6 +469,10 @@ const companyRows: { th: string; td: string }[] = [
     font-size: 1.2rem;
     letter-spacing: 0.06em;
     margin-left: 0.3em;
+  }
+  @media (max-width: 880px) {
+    .message-grid { grid-template-columns: 1fr; gap: 28px; }
+    .message-figure { max-width: 340px; margin-inline: auto; }
   }
 
   /* ---- services ---- */
