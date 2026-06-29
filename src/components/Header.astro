@@ -40,14 +40,14 @@ import { url } from '../utils/url';
     inset: 0 0 auto 0;
     height: var(--header-h);
     z-index: 100;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: saturate(180%) blur(14px);
-    border-bottom: 1px solid transparent;
-    transition: box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    /* 常に不透明な白。暗い色のページ見出しの上でも灰色に透けず、
+       ロゴ画像の白背景も同化して目立たない。 */
+    background: #ffffff;
+    border-bottom: 1px solid var(--line);
+    transition: box-shadow 0.25s ease;
   }
   .site-header.scrolled {
     box-shadow: var(--shadow-sm);
-    border-bottom-color: var(--line);
   }
   .header-inner {
     height: 100%;
