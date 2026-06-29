@@ -4,6 +4,24 @@ import Icon from '../../components/Icon.astro';
 import { COMPANY, CULTURE, IDEAL, JOB_OPENINGS, RECRUIT_CONTACT } from '../../data/site';
 import { url } from '../../utils/url';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+
+// 募集要項の各表を、連絡先・オンライン応募の行も含めて事前にHTML化（テンプレート内の
+// 入れ子式を避けて確実にビルドできるようにする）
+const telHref = 'tel:' + RECRUIT_CONTACT.tel.replaceAll('-', '');
+const contactHtml =
+  `TEL：<a href="${telHref}">${RECRUIT_CONTACT.tel}</a><br>` +
+  `Mail：<a href="mailto:${RECRUIT_CONTACT.email}">${RECRUIT_CONTACT.email}</a>`;
+const applyHtml =
+  `<a class="job-apply-link" href="${url('/recruit_top/subscription/')}">オンライン応募ページへ →</a>`;
+
+const jobs = JOB_OPENINGS.map((job) => ({
+  label: job.label,
+  rows: [
+    ...job.rows.map((r) => ({ th: r.th, html: r.td.split('\n').join('<br>') })),
+    { th: '連絡先', html: contactHtml },
+    { th: 'オンライン応募', html: applyHtml },
+  ],
+}));
 ---
 
 <Base title="採用情報" path="/recruit_top/" description="株式会社オアシス情報システムズの採用情報。一緒に未来をつくる仲間を募集しています。">
@@ -27,10 +45,6 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
         <p class="lead">
           私たちは、確かな技術と人の力でお客様のビジネスを支えています。<br />
           新しい仲間として、あなたの力を発揮してください。
-        </p>
-        <p class="recruit-types reveal">
-          <a href="#requirements" data-job="career">キャリア採用</a>
-          <a href="#requirements" data-job="newgrad">新卒採用</a>
         </p>
       </div>
     </div>
@@ -83,41 +97,25 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
       <div class="section-head reveal">
         <span class="eyebrow">REQUIREMENTS</span>
         <h2>募集要項</h2>
-        <p class="lead">キャリア採用・新卒採用ともに募集しています。タブで切り替えてご覧ください。</p>
+        <p class="lead">キャリア採用・新卒採用ともに募集しています。</p>
       </div>
 
-      <div class="job-tabs reveal">
-        {JOB_OPENINGS.map((job, i) => (
-          <input type="radio" name="job-tab" id={`job-${job.id}`} checked={i === 0} />
-        ))}
-        <div class="job-tablist" role="tablist">
-          {JOB_OPENINGS.map((job) => (
-            <label class="job-tab" for={`job-${job.id}`}>{job.label}</label>
-          ))}
-        </div>
-        <div class="job-panels">
-          {JOB_OPENINGS.map((job) => (
-            <div class={`job-panel job-panel-${job.id}`}>
-              <table class="job-table">
-                <tbody>
-                  {job.rows.map((r) => (
-                    <tr>
-                      <th scope="row">{r.th}</th>
-                      <td>{r.td.split('\n').map((line, idx) => (idx === 0 ? line : [<br />, line]))}</td>
-                    </tr>
-                  ))}
+      <div class="job-list">
+        {jobs.map((job) => (
+          <div class="job-block reveal">
+            <h3 class="job-blk-title">{job.label}</h3>
+            <table class="job-table">
+              <tbody>
+                {job.rows.map((r) => (
                   <tr>
-                    <th scope="row">連絡先</th>
-                    <td>
-                      TEL：<a href={`tel:${RECRUIT_CONTACT.tel.replaceAll('-', '')}`}>{RECRUIT_CONTACT.tel}</a><br />
-                      Mail：<a href={`mailto:${RECRUIT_CONTACT.email}`}>{RECRUIT_CONTACT.email}</a>
-                    </td>
+                    <th scope="row">{r.th}</th>
+                    <td set:html={r.html}></td>
                   </tr>
-                </tbody>
-              </table>
-            </div>
-          ))}
-        </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ))}
       </div>
       <p class="job-note reveal">※ 記載の条件は募集時点のものです。最新の募集状況は、オンライン応募またはお問い合わせよりご確認ください。</p>
     </div>
@@ -174,36 +172,6 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
   .culture-card h3 { font-size: 1.15rem; margin-bottom: 0.5em; }
   .culture-card p { color: var(--muted); font-size: 0.93rem; margin: 0; }
 
-  .recruit-types {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 1.4em;
-  }
-  .recruit-types a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--blue-soft);
-    color: var(--blue-d);
-    border: 1px solid #d9ecf7;
-    border-radius: 999px;
-    padding: 9px 24px;
-    font-weight: 700;
-    font-size: 0.92rem;
-    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
-  }
-  .recruit-types a::after {
-    content: "↓";
-    font-size: 0.85em;
-    opacity: 0.7;
-  }
-  .recruit-types a:hover {
-    background: var(--blue);
-    color: #fff;
-    transform: translateY(-2px);
-  }
-
   /* 求める人物像 */
   .ideal-list {
     list-style: none;
@@ -248,49 +216,26 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
     .ideal-list { grid-template-columns: 1fr; }
   }
 
-  /* 募集要項（タブ切替・CSSのみ） */
-  .job-tabs {
-    max-width: 840px;
+  /* 募集要項（キャリア・新卒を直接掲載） */
+  .job-list {
+    max-width: 860px;
     margin: 0 auto;
+    display: grid;
+    gap: clamp(30px, 5vw, 48px);
   }
-  .job-tabs > input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
+  .job-blk-title {
+    font-size: 1.3rem;
+    color: var(--ink);
+    padding-left: 0.7em;
+    border-left: 5px solid;
+    border-image: var(--grad) 1;
+    margin-bottom: 1em;
   }
-  .job-tablist {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 26px;
-  }
-  .job-tab {
-    cursor: pointer;
-    padding: 12px 30px;
-    border-radius: 999px;
+  .job-apply-link {
     font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--muted);
-    background: #fff;
-    border: 1px solid var(--line);
-    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    color: var(--blue-d);
   }
-  .job-tab:hover {
-    color: var(--blue);
-  }
-  .job-panel {
-    display: none;
-  }
-  #job-career:checked ~ .job-tablist label[for='job-career'],
-  #job-newgrad:checked ~ .job-tablist label[for='job-newgrad'] {
-    background: var(--grad);
-    color: #fff;
-    border-color: transparent;
-  }
-  #job-career:checked ~ .job-panels .job-panel-career,
-  #job-newgrad:checked ~ .job-panels .job-panel-newgrad {
-    display: block;
-  }
+  .job-apply-link:hover { color: var(--blue); }
   .job-table {
     width: 100%;
     border-collapse: collapse;
@@ -369,13 +314,3 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
     .apply-box { grid-template-columns: 1fr; }
   }
 </style>
-
-<script>
-  // MESSAGE下のボタン → 募集要項の該当タブを表示してスクロール
-  document.querySelectorAll('.recruit-types a[data-job]').forEach((a) => {
-    a.addEventListener('click', () => {
-      const radio = document.getElementById('job-' + a.getAttribute('data-job')) as HTMLInputElement | null;
-      if (radio) radio.checked = true;
-    });
-  });
-</script>
