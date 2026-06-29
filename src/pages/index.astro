@@ -218,10 +218,13 @@ const companyRows: { th: string; td: string }[] = [
         <h2>対応技術</h2>
         <p class="lead">幅広い技術スタックに対応します（一例）。</p>
       </div>
-      <div class="tech-groups">
-        {TECH_GROUPS.map((g) => (
-          <div class="tech-group reveal">
-            <div class="tg-label">{g.category}</div>
+      <div class="tech-cards">
+        {TECH_GROUPS.map((g, i) => (
+          <div class="tech-card reveal" data-delay={i % 3}>
+            <div class="tc-head">
+              <span class="tc-icon"><Icon name={g.icon} size={24} /></span>
+              <h3 class="tc-title">{g.category}</h3>
+            </div>
             <div class="tg-chips">
               {g.items.map((t) => <span class="tech-chip">{t}</span>)}
             </div>
@@ -606,49 +609,68 @@ const companyRows: { th: string; td: string }[] = [
   }
 
   /* ---- tech (カテゴリ別) ---- */
-  .tech-groups {
-    max-width: 900px;
-    margin-inline: auto;
+  .tech-cards {
     display: grid;
-    gap: 4px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2vw, 24px);
   }
-  .tech-group {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 24px;
+  .tech-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 26px 26px 24px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .tech-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: #d6e6f2;
+  }
+  .tc-head {
+    display: flex;
     align-items: center;
-    padding: 20px 8px;
-    border-bottom: 1px solid var(--line);
+    gap: 12px;
+    margin-bottom: 18px;
   }
-  .tech-group:last-child { border-bottom: none; }
-  .tg-label {
-    font-weight: 700;
-    color: var(--blue-d);
-    font-size: 0.96rem;
+  .tc-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border-radius: 12px;
+    background: var(--grad);
+    color: #fff;
+  }
+  .tc-title {
+    font-size: 1.02rem;
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.3;
   }
   .tg-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 9px;
   }
   .tech-chip {
-    background: #fff;
+    background: var(--soft);
     border: 1px solid var(--line);
     border-radius: 999px;
-    padding: 9px 18px;
+    padding: 7px 15px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.86rem;
     color: var(--ink-soft);
     transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   }
-  .tech-chip:hover { transform: translateY(-3px); border-color: var(--blue); color: var(--blue); }
+  .tech-chip:hover { transform: translateY(-2px); border-color: var(--blue); color: var(--blue); }
 
-  @media (max-width: 640px) {
-    .tech-group {
-      grid-template-columns: 1fr;
-      gap: 10px;
-      padding: 16px 8px;
-    }
+  @media (max-width: 900px) {
+    .tech-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .tech-cards { grid-template-columns: 1fr; }
   }
 
   /* ---- company ---- */

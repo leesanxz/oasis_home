@@ -152,12 +152,13 @@ export const PROCESS = [
 
 // 対応技術（カテゴリ別）[案] ※実際の対応範囲に合わせて調整してください
 export const TECH_GROUPS = [
-  { category: '言語', items: ['Java', 'Python', 'PHP', 'JavaScript', 'TypeScript', 'C# / .NET'] },
-  { category: 'フレームワーク / ライブラリ', items: ['React', 'Vue.js', 'Node.js', 'Spring', 'Laravel'] },
-  { category: 'クラウド / インフラ', items: ['AWS', 'Microsoft Azure', 'Google Cloud', 'Docker', 'Linux'] },
-  { category: 'データベース', items: ['MySQL', 'PostgreSQL', 'Oracle', 'SQL Server'] },
+  { category: '言語', icon: 'code', items: ['Java', 'Python', 'PHP', 'JavaScript', 'TypeScript', 'C# / .NET'] },
+  { category: 'フレームワーク / ライブラリ', icon: 'layers', items: ['React', 'Vue.js', 'Node.js', 'Spring', 'Laravel'] },
+  { category: 'クラウド / インフラ', icon: 'cloud', items: ['AWS', 'Microsoft Azure', 'Google Cloud', 'Docker', 'Linux'] },
+  { category: 'データベース', icon: 'database', items: ['MySQL', 'PostgreSQL', 'Oracle', 'SQL Server'] },
   {
     category: 'AI / データ活用',
+    icon: 'cpu',
     items: ['生成AI・LLM活用', '機械学習（ML）', '自然言語処理（NLP）', 'RAG / AIエージェント', 'データ分析'],
   },
 ] as const;
