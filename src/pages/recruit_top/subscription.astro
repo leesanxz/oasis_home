@@ -1,9 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
 import { FORM } from '../../data/site';
 import { url } from '../../utils/url';
-
-const endpoint = FORM.endpoint;
 ---
 
 <Base
@@ -27,10 +26,7 @@ const endpoint = FORM.endpoint;
   <section class="section" style="padding-top: clamp(20px, 4vw, 40px)">
     <div class="container">
       <div class="form-intro reveal">
-        <p>
-          以下のフォームに必要事項をご記入のうえ、送信してください。<br />
-          <span class="req-note"><span class="req">*</span> は必須項目です。</span>
-        </p>
+        <p>以下のフォームに必要事項をご記入のうえ、送信してください。</p>
         <p class="privacy-agree-note">
           ご入力いただいた個人情報は、採用選考の目的にのみ利用いたします。詳しくは
           <a href={url('/privacy/')}>個人情報保護方針</a> および
@@ -39,84 +35,27 @@ const endpoint = FORM.endpoint;
         </p>
       </div>
 
-      {!endpoint && (
-        <div class="config-banner" role="status">
-          <strong>設定が必要です：</strong>
-          応募フォームの送信先が未設定です。<code>src/data/site.ts</code> の
-          <code>FORM.endpoint</code> に送信先（Formspree等のURL）を設定すると有効になります。
-        </div>
-      )}
+      <div class="form-embed reveal">
+        <iframe
+          src={FORM.embedUrl}
+          title="採用オンライン応募フォーム"
+          loading="lazy"
+        >読み込んでいます…</iframe>
+      </div>
 
-      <form
-        id="entry-form"
-        class="entry-form card reveal"
-        method="POST"
-        action={endpoint || undefined}
-        novalidate
-      >
-        <div class="field">
-          <label for="name">お名前 <span class="req">*</span></label>
-          <input type="text" id="name" name="name" required autocomplete="name" />
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="email">メールアドレス <span class="req">*</span></label>
-            <input type="email" id="email" name="email" required autocomplete="email" />
-          </div>
-          <div class="field">
-            <label for="tel">電話番号</label>
-            <input type="tel" id="tel" name="tel" autocomplete="tel" />
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="position">応募職種</label>
-          <select id="position" name="position">
-            <option value="">選択してください</option>
-            <option value="ソフトウェアエンジニア">ソフトウェアエンジニア</option>
-            <option value="クラウドエンジニア">クラウドエンジニア</option>
-            <option value="その他">その他</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="message">志望動機・ご質問など <span class="req">*</span></label>
-          <textarea id="message" name="message" rows="6" required></textarea>
-        </div>
-
-        <div class="field field-check">
-          <label>
-            <input type="checkbox" id="agree" name="agree" required />
-            <span>
-              <a href={url('/privacy/')} target="_blank" rel="noopener">個人情報の取扱い</a>に同意します
-              <span class="req">*</span>
-            </span>
-          </label>
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" class="btn btn--grad" id="submit-btn">応募内容を送信する</button>
-        </div>
-
-        <p class="form-status" id="form-status" role="alert" aria-live="polite" hidden></p>
-      </form>
+      <p class="form-open reveal">
+        フォームがうまく表示されない場合は、
+        <a href={FORM.openUrl} target="_blank" rel="noopener">別タブで応募フォームを開く<Icon name="arrow" size={16} /></a>
+      </p>
     </div>
   </section>
 </Base>
 
 <style>
   .form-intro {
-    max-width: 720px;
-    margin: 0 auto 1.6em;
-  }
-  .req {
-    color: #d8453b;
-    font-weight: 700;
-  }
-  .req-note {
-    font-size: 0.88rem;
-    color: var(--muted);
+    max-width: 760px;
+    margin: 0 auto 1.8em;
+    text-align: center;
   }
   .privacy-agree-note {
     font-size: 0.88rem;
@@ -124,155 +63,34 @@ const endpoint = FORM.endpoint;
     background: var(--soft);
     border-radius: var(--radius);
     padding: 14px 18px;
+    text-align: left;
   }
-  .config-banner {
-    max-width: 720px;
-    margin: 0 auto 1.6em;
-    background: #fff8e6;
-    border: 1px solid #f0d98a;
-    border-radius: var(--radius);
-    padding: 14px 18px;
-    font-size: 0.9rem;
-    color: #6b5a17;
-  }
-  .config-banner code {
-    background: #fff;
-    border: 1px solid #e8d98f;
-    border-radius: 5px;
-    padding: 1px 6px;
-    font-size: 0.86em;
-  }
-  .entry-form {
-    max-width: 720px;
+  .form-embed {
+    max-width: 760px;
     margin-inline: auto;
-    padding: clamp(28px, 4vw, 44px);
-  }
-  .field {
-    margin-bottom: 1.4em;
-  }
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-  }
-  .field label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 0.5em;
-    font-size: 0.94rem;
-  }
-  .field input,
-  .field select,
-  .field textarea {
-    width: 100%;
-    padding: 0.8em 1em;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 1rem;
     background: #fff;
-    color: var(--ink);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
   }
-  .field input:focus,
-  .field select:focus,
-  .field textarea:focus {
-    outline: none;
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px rgba(42, 134, 192, 0.15);
+  .form-embed iframe {
+    display: block;
+    width: 100%;
+    height: 1500px;
+    border: 0;
   }
-  .field textarea {
-    resize: vertical;
-  }
-  .field-check label {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6em;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  .field-check input {
-    width: auto;
-    margin-top: 0.35em;
-  }
-  .form-actions {
+  .form-open {
+    max-width: 760px;
+    margin: 1.4em auto 0;
     text-align: center;
-    margin-top: 1.8em;
+    font-size: 0.92rem;
+    color: var(--muted);
   }
-  .form-status {
-    margin-top: 1.2em;
-    text-align: center;
-    padding: 0.9em 1em;
-    border-radius: 10px;
-    font-weight: 600;
-  }
-  .form-status.is-error {
-    background: #fdecea;
-    color: #b3261e;
-  }
-  .form-status.is-success {
-    background: #eaf7e8;
-    color: #2e7d32;
-  }
-  @media (max-width: 600px) {
-    .field-row {
-      grid-template-columns: 1fr;
-    }
+  .form-open a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
   }
 </style>
-
-<script>
-  const form = document.getElementById('entry-form') as HTMLFormElement | null;
-  const status = document.getElementById('form-status') as HTMLElement | null;
-  const btn = document.getElementById('submit-btn') as HTMLButtonElement | null;
-
-  const show = (msg: string, type: 'error' | 'success') => {
-    if (!status) return;
-    status.textContent = msg;
-    status.className = `form-status is-${type}`;
-    status.hidden = false;
-  };
-
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    const endpoint = form.getAttribute('action');
-    if (!endpoint) {
-      show(
-        '現在、送信先が設定されていないため送信できません。お手数ですが、お電話または別途お問い合わせください。',
-        'error'
-      );
-      return;
-    }
-
-    if (btn) {
-      btn.disabled = true;
-      btn.textContent = '送信中…';
-    }
-
-    try {
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' },
-      });
-      if (res.ok) {
-        form.reset();
-        show('ご応募ありがとうございます。内容を送信しました。担当者よりご連絡いたします。', 'success');
-      } else {
-        show('送信に失敗しました。時間をおいて再度お試しいただくか、お電話にてご連絡ください。', 'error');
-      }
-    } catch {
-      show('通信エラーが発生しました。時間をおいて再度お試しください。', 'error');
-    } finally {
-      if (btn) {
-        btn.disabled = false;
-        btn.textContent = '応募内容を送信する';
-      }
-    }
-  });
-</script>

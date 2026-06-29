@@ -148,9 +148,14 @@ export const HISTORY = [
   { year: '2023', month: '6月', text: '個人情報保護方針を改定（2023年6月7日制定）' },
 ] as const;
 
-// 採用オンライン応募フォームの送信先（要設定）
+// 採用オンライン応募フォーム（Googleフォーム連携）
+const GOOGLE_FORM =
+  'https://docs.google.com/forms/d/e/1FAIpQLSfbqFY8y2T93NYsBJsfGmTQ7dH8629-WZW6o8Zuq_v6Gd8cFA/viewform';
 export const FORM = {
-  endpoint: '', // 例: 'https://formspree.io/f/xxxxxxxx'
+  // ページ内に埋め込む用（embedded=true）
+  embedUrl: `${GOOGLE_FORM}?embedded=true`,
+  // 別タブで開く用
+  openUrl: GOOGLE_FORM,
 } as const;
 
 // グローバルナビゲーション（URLは旧サイト構造を踏襲しSEOを維持）
