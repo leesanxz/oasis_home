@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
-import { COMPANY, CULTURE } from '../../data/site';
+import { COMPANY, CULTURE, IDEAL } from '../../data/site';
 import { url } from '../../utils/url';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 ---
@@ -51,8 +51,30 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
     </div>
   </section>
 
-  <!-- apply -->
+  <!-- 求める人物像 -->
   <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">IDEAL CANDIDATE</span>
+        <h2>求める人物像</h2>
+        <p class="lead">スキルや経験はもちろん、こんな想いを持った方をお待ちしています。</p>
+      </div>
+      <ul class="ideal-list">
+        {IDEAL.map((t) => (
+          <li class="ideal-item reveal">
+            <span class="ideal-check"><Icon name="check" size={18} /></span>
+            <span>{t}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="ideal-note reveal">
+        ※ 未経験の方や、これから挑戦したい方も歓迎します。まずはお気軽にご応募・ご相談ください。
+      </p>
+    </div>
+  </section>
+
+  <!-- apply -->
+  <section class="section section--soft">
     <div class="container">
       <div class="apply-box reveal">
         <div class="apply-text">
@@ -101,6 +123,50 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
   }
   .culture-card h3 { font-size: 1.15rem; margin-bottom: 0.5em; }
   .culture-card p { color: var(--muted); font-size: 0.93rem; margin: 0; }
+
+  /* 求める人物像 */
+  .ideal-list {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 760px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .ideal-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    font-weight: 600;
+    color: var(--ink);
+    box-shadow: var(--shadow-sm);
+  }
+  .ideal-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--grad);
+    color: #fff;
+  }
+  .ideal-note {
+    max-width: 760px;
+    margin: 1.4em auto 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+  @media (max-width: 640px) {
+    .ideal-list { grid-template-columns: 1fr; }
+  }
 
   .apply-box {
     display: grid;
