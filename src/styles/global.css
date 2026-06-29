@@ -34,7 +34,7 @@
 
   --maxw: 1200px;
   --gutter: clamp(20px, 5vw, 40px);
-  --header-h: 78px;
+  --header-h: 94px;
 
   --font: "Plus Jakarta Sans", "Hiragino Kaku Gothic ProN", "Hiragino Sans",
     "Noto Sans JP", Meiryo, sans-serif;

@@ -55,7 +55,11 @@ const year = 2026;
   <div class="footer-bottom">
     <div class="container">
       <small>© {year} {SITE.name} All rights reserved.</small>
-      <small>法人番号：{COMPANY.corporateNumber}</small>
+      <small class="fb-links">
+        <a href={url('/privacy/')}>個人情報保護方針</a>
+        <span aria-hidden="true">｜</span>
+        法人番号：{COMPANY.corporateNumber}
+      </small>
     </div>
   </div>
 </footer>
@@ -153,6 +157,9 @@ const year = 2026;
     flex-wrap: wrap;
   }
   .footer-bottom small { color: rgba(255, 255, 255, 0.5); font-size: 0.78rem; }
+  .fb-links { display: inline-flex; align-items: center; gap: 8px; }
+  .fb-links a { color: rgba(255, 255, 255, 0.78); text-decoration: underline; }
+  .fb-links a:hover { color: var(--green); }
 
   @media (max-width: 820px) {
     .cta-box { grid-template-columns: 1fr; }
