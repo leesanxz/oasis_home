@@ -39,6 +39,9 @@ jobs:
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
+        with:
+          # Pagesが無効化されている場合に自動で有効化を試みる
+          enablement: true
 
       - name: Build (with base path for project pages)
         run: npm run build
