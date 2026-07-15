@@ -1,39 +1,25 @@
 ---
-// オアシス情報システムズ ロゴ（元のOiSマーク＋読める社名／縦並び）
+// オアシス情報システムズ ロゴ（元の logo-full.png：OiSマーク＋社名／余白トリミング版）
 import { url } from '../utils/url';
 interface Props {
-  showWord?: boolean; // 社名テキストを表示
-  markSize?: number; // OiSマークの高さ(px)
+  markSize?: number; // 表示高さ(px)
 }
-const { showWord = true, markSize = 40 } = Astro.props;
+const { markSize = 62 } = Astro.props;
 ---
 
-<span class="oasis-logo">
-  <img class="ol-mark" src={url('/assets/logo-ois.png')} alt="オアシス情報システムズ" style={`height:${markSize}px`} />
-  {showWord && <span class="ol-name">株式会社オアシス情報システムズ</span>}
-</span>
+<img
+  class="oasis-logo"
+  src={url('/assets/logo-full-trim.png')}
+  alt="株式会社オアシス情報システムズ"
+  style={`height:${markSize}px`}
+  width="430"
+  height="267"
+/>
 
 <style>
   .oasis-logo {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    line-height: 1;
-  }
-  .ol-mark {
-    width: auto;
     display: block;
-  }
-  .ol-name {
-    font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
-    color: #1c86c4;
-    font-weight: 700;
-    font-size: 0.82rem;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-  }
-  @media (max-width: 420px) {
-    .ol-name { font-size: 0.72rem; letter-spacing: 0.01em; }
+    width: auto;
+    max-width: 100%;
   }
 </style>
