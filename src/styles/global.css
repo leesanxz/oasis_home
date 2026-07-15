@@ -204,12 +204,8 @@ p {
   border-radius: 999px;
   border: 1px solid #d9ecf7;
 }
-.chip .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 4px rgba(152, 199, 39, 0.25);
+.chip svg {
+  flex: none;
 }
 
 /* ---------- card ---------- */
