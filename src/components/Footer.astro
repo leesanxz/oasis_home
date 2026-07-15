@@ -29,8 +29,7 @@ const year = 2026;
   <div class="container footer-top">
     <div class="footer-brand">
       <span class="f-logo">
-        <LogoMark size={52} tone="light" />
-        <span class="f-name">{SITE.name}</span>
+        <LogoMark size={60} tone="gradient" title={SITE.name} />
       </span>
       <p class="f-tagline">{SITE.tagline}</p>
       <p class="f-address">
@@ -126,18 +125,10 @@ const year = 2026;
     gap: clamp(28px, 5vw, 56px);
     padding-block: clamp(48px, 7vw, 74px);
   }
-  /* 濃紺背景に白い水滴シンボルを直接配置。社名テキストを併記 */
+  /* 濃紺背景に④-1水滴シンボル（青×緑グラデ）を単独配置 */
   .f-logo {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-  }
-  .f-name {
-    font-weight: 700;
-    font-size: 1.02rem;
-    letter-spacing: 0.02em;
-    color: #fff;
-    line-height: 1.3;
   }
   .f-tagline { margin-top: 1em; color: var(--green); font-weight: 700; }
   .f-address { line-height: 1.9; color: rgba(255, 255, 255, 0.62); }
