@@ -1,0 +1,47 @@
+---
+// ④-1 水滴シンボルマーク（水滴＋控えめな葉）
+// tone: 'gradient'（白背景向け・ブランドグラデ） / 'light'（濃色背景向け・白）
+interface Props {
+  size?: number;          // 表示サイズ(px)
+  tone?: 'gradient' | 'light';
+  title?: string;
+}
+const { size = 56, tone = 'gradient', title = '株式会社オアシス情報システムズ' } = Astro.props;
+const uid = 'lm-' + Math.random().toString(36).slice(2, 8);
+const dropFill = tone === 'light' ? '#ffffff' : `url(#${uid})`;
+const leafFill = tone === 'light' ? '#cfe8a8' : '#ffffff';
+const leafOpacity = tone === 'light' ? 0.9 : 0.24;
+---
+
+<svg
+  class="logo-mark"
+  width={size}
+  height={size}
+  viewBox="0 0 100 100"
+  fill="none"
+  role="img"
+  aria-label={title}
+>
+  {tone === 'gradient' && (
+    <defs>
+      <linearGradient id={uid} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#2A86C0" />
+        <stop offset=".5" stop-color="#3AA0C8" />
+        <stop offset="1" stop-color="#98C727" />
+      </linearGradient>
+    </defs>
+  )}
+  <path
+    d="M50 26 C 62 44, 70 53, 70 63 A 20 20 0 1 1 30 63 C 30 53, 38 44, 50 26 Z"
+    fill={dropFill}
+  />
+  <path
+    d="M50 63 C 50 46, 59 35, 74 33 C 73 49, 64 63, 50 63 Z"
+    fill={leafFill}
+    opacity={leafOpacity}
+  />
+</svg>
+
+<style>
+  .logo-mark { display: block; }
+</style>
