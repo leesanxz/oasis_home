@@ -1,69 +1,39 @@
 ---
-// オアシス情報システムズ ロゴ（④-1：水滴＋控えめな葉 のマーク＋ワードマーク）
-// water = オアシス, leaf = 成長, ブランドグラデーション。
+// オアシス情報システムズ ロゴ（元のOiSマーク＋読める社名／縦並び）
+import { url } from '../utils/url';
 interface Props {
-  showWord?: boolean; // ワードマーク（OASIS＋社名）を表示
-  markSize?: number; // マークの高さ(px)
+  showWord?: boolean; // 社名テキストを表示
+  markSize?: number; // OiSマークの高さ(px)
 }
-const { showWord = true, markSize = 46 } = Astro.props;
+const { showWord = true, markSize = 40 } = Astro.props;
 ---
 
-<span class="oasis-logo" style={`--mk:${markSize}px`}>
-  <svg class="ol-mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-    <defs>
-      <linearGradient id="olDrop" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#2A86C0" />
-        <stop offset=".5" stop-color="#3AA0C8" />
-        <stop offset="1" stop-color="#98C727" />
-      </linearGradient>
-    </defs>
-    <path d="M50 26 C 62 44, 70 53, 70 63 A 20 20 0 1 1 30 63 C 30 53, 38 44, 50 26 Z" fill="url(#olDrop)" />
-    <path d="M50 63 C 50 46, 59 35, 74 33 C 73 49, 64 63, 50 63 Z" fill="#ffffff" opacity="0.24" />
-  </svg>
-  {showWord && (
-    <span class="ol-word">
-      <span class="ol-en">O<span class="ol-a">A</span>SIS</span>
-      <span class="ol-jp">オアシス情報システムズ</span>
-    </span>
-  )}
+<span class="oasis-logo">
+  <img class="ol-mark" src={url('/assets/logo-ois.png')} alt="オアシス情報システムズ" style={`height:${markSize}px`} />
+  {showWord && <span class="ol-name">株式会社オアシス情報システムズ</span>}
 </span>
 
 <style>
   .oasis-logo {
     display: inline-flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .ol-mark {
-    width: var(--mk, 46px);
-    height: var(--mk, 46px);
-    flex: none;
-    display: block;
-  }
-  .ol-word {
-    display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
     line-height: 1;
   }
-  .ol-en {
-    font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
-    font-weight: 800;
-    font-size: 1.5rem;
-    letter-spacing: 0.13em;
-    background: linear-gradient(100deg, #2a86c0, #3aa0c8 45%, #98c727);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .ol-mark {
+    width: auto;
+    display: block;
   }
-  .ol-a {
-    -webkit-text-fill-color: #7fae1d;
-    color: #7fae1d;
-  }
-  .ol-jp {
+  .ol-name {
+    font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+    color: #1c86c4;
     font-weight: 700;
-    font-size: 0.6rem;
-    letter-spacing: 0.16em;
-    color: var(--muted, #5b6b7a);
-    margin-top: 6px;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  @media (max-width: 420px) {
+    .ol-name { font-size: 0.72rem; letter-spacing: 0.01em; }
   }
 </style>
