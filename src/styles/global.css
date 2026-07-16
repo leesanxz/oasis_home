@@ -194,7 +194,7 @@ p {
 /* ---------- chip ---------- */
 .chip {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 4px;
   background: var(--blue-soft);
   color: var(--blue-d);
