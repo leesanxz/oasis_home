@@ -195,7 +195,7 @@ p {
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: 4px;
   background: var(--blue-soft);
   color: var(--blue-d);
   font-weight: 700;
