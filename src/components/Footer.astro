@@ -29,8 +29,8 @@ const year = 2026;
   <div class="container footer-top">
     <div class="footer-brand">
       <div class="f-brand-row">
-        <span class="f-logo">
-          <LogoMark size={52} tone="gradient" title={SITE.name} />
+        <span class="f-logo f-tile">
+          <LogoMark size={34} tone="light" title={SITE.name} />
         </span>
         <p class="f-tagline">{SITE.tagline}</p>
       </div>
@@ -137,6 +137,14 @@ const year = 2026;
     display: inline-flex;
     align-items: center;
     flex: none;
+  }
+  /* 四方を囲むグラデタイル（ファビコンと同じ見た目） */
+  .f-tile {
+    width: 52px;
+    height: 52px;
+    justify-content: center;
+    background: var(--grad);
+    border-radius: 14px;
   }
   .f-tagline { margin: 0; color: var(--green); font-weight: 700; }
   .f-address { line-height: 1.9; color: rgba(255, 255, 255, 0.62); }
