@@ -28,10 +28,12 @@ const year = 2026;
 
   <div class="container footer-top">
     <div class="footer-brand">
-      <span class="f-logo">
-        <LogoMark size={60} tone="gradient" title={SITE.name} />
-      </span>
-      <p class="f-tagline">{SITE.tagline}</p>
+      <div class="f-brand-row">
+        <span class="f-logo">
+          <LogoMark size={52} tone="gradient" title={SITE.name} />
+        </span>
+        <p class="f-tagline">{SITE.tagline}</p>
+      </div>
       <p class="f-address">
         〒{COMPANY.postalCode}<br />
         {COMPANY.addressLine1}<br />{COMPANY.addressLine2}<br />
@@ -125,12 +127,18 @@ const year = 2026;
     gap: clamp(28px, 5vw, 56px);
     padding-block: clamp(48px, 7vw, 74px);
   }
-  /* 濃紺背景に④-1水滴シンボル（青×緑グラデ）を単独配置 */
+  /* 濃紺背景に④-1水滴シンボル（青×緑グラデ）＋タグラインを横1行配置 */
+  .f-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
   .f-logo {
     display: inline-flex;
     align-items: center;
+    flex: none;
   }
-  .f-tagline { margin-top: 1em; color: var(--green); font-weight: 700; }
+  .f-tagline { margin: 0; color: var(--green); font-weight: 700; }
   .f-address { line-height: 1.9; color: rgba(255, 255, 255, 0.62); }
   .f-address a { color: rgba(255, 255, 255, 0.62); }
   .footer-nav h3,
